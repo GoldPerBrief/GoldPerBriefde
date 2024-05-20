@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<label for="alignment">Alignment:</label>
+		<select name="alignment" id="alignment">
+			<option value="none-selected" selected="true">Please select one</option>
+			<option value="lawful-good">Lawful Good</option>
+			<option value="neutral-good">Neutral Good</option>
+			<option value="chaotic-good">Chaotic Good</option>
+			<option value="lawful-neutral">Lawful Neutral</option>
+			<option value="true-neutral">True Neutral</option>
+			<option value="chaotic-neutral">Chaotic Neutral</option>
+			<option value="lawful-evil">Lawful Evil</option>
+			<option value="neutral-evil">Neutral Evil</option>
+			<option value="chaotic-evil">Chaotic Evil</option>
+		</select>
+		<script>
+			document.getElementById("alignment").onchange = function() {
+				// console.debug("Selected: " + this.value);
+				const selectorList = document.getElementsByClassName("selector");
+				switch (this.value) {
+				case "none-selected":
+					// console.debug("Case: none-selected");
+					for (let i = 0; i < selectorList.length; i++) {
+						selectorList[i].hidden = true;
+					};
+					document.getElementById("none-selected").hidden = false;
+					break;
+				case "lawful-good":
+					// console.debug("Case: lawful-good");
+					for (let i = 0; i < selectorList.length; i++) {
+						selectorList[i].hidden = true;
+					};
+					document.getElementById("lawful-good").hidden = false;
+					break;
+				case "neutral-good":
+					// console.debug("Case: neutral-good");
+					for (let i = 0; i < selectorList.length; i++) {
+						selectorList[i].hidden = true;
+					};
+					document.getElementById("neutral-good").hidden = false;
+					break;
+				case "chaotic-good":
+					// console.debug("Case: chaotic-good");
+					for (let i = 0; i < selectorList.length; i++) {
+						selectorList[i].hidden = true;
+					};
+					document.getElementById("chaotic-good").hidden = false;
+					break;
+				case "lawful-neutral":
+					// console.debug("Case: lawful-neutral");
+					for (let i = 0; i < selectorList.length; i++) {
+						selectorList[i].hidden = true;
+					};
+					document.getElementById("lawful-neutral").hidden = false;
+					break;
+				case "true-neutral":
+					// console.debug("Case: true-neutral");
+					for (let i = 0; i < selectorList.length; i++) {
+						selectorList[i].hidden = true;
+					};
+					document.getElementById("true-neutral").hidden = false;
+					break;
+				case "chaotic-neutral":
+					// console.debug("Case: chaotic-neutral");
+					for (let i = 0; i < selectorList.length; i++) {
+						selectorList[i].hidden = true;
+					};
+					document.getElementById("chaotic-neutral").hidden = false;
+					break;
+				case "lawful-evil":
+					// console.debug("Case: chaotic-evil");
+					for (let i = 0; i < selectorList.length; i++) {
+						selectorList[i].hidden = true;
+					};
+					document.getElementById("lawful-evil").hidden = false;
+					break;
+				case "neutral-evil":
+					// console.debug("Case: neutral-evil");
+					for (let i = 0; i < selectorList.length; i++) {
+						selectorList[i].hidden = true;
+					};
+					document.getElementById("neutral-evil").hidden = false;
+					break;
+				case "chaotic-evil":
+					// console.debug("Case: chaotic-evil");
+					for (let i = 0; i < selectorList.length; i++) {
+						selectorList[i].hidden = true;
+					};
+					document.getElementById("chaotic-evil").hidden = false;
+					break;
+				default:
+					// console.debug("Case: default");
+					for (let i = 0; i < selectorList.length; i++) {
+						selectorList[i].hidden = true;
+					};
+					document.getElementById("none-selected").hidden = false;
+				}
+			};
+		</script>
+		<br>
+		<div id="lawful-good" class="selector" hidden="true">
+			<h3>Gender</h3>
+			<a>Check one or more options that reflect your gender.</a>
+
+			<form>
+				<input type="checkbox" id="form1Gender1" value="woman">
+				<label for="form1Gender1"> woman </label><br>
+				<input type="checkbox" id="form1Gender2" value="man">
+				<label for="form1Gender2"> man </label><br>
+				<input type="checkbox" id="form1Gender3" value="non-binary">
+				<label for="form1Gender3"> non-binary </label><br>
+				<input type="checkbox" id="form1Gender4" value="transgender">
+				<label for="form1Gender4"> transgender </label><br>
+				<input type="checkbox" id="form1Gender5" value="intersex">
+				<label for="form1Gender5"> intersex </label><br>
+				<input type="checkbox" id="form1Gender6" value="two-spirit">
+				<label for="form1Gender6"> Two Spirit ([don't] see below for more information) </label><br>
+				<input type="checkbox" id="form1Gender7" value="gender-non-conforming">
+				<label for="form1Gender7"> gender non-conforming </label><br>
+				<input type="checkbox" id="form1Gender8" value="other-select">
+				<label for="form1Gender8"> Other: </label>
+				<input type="text" id="form1Gender9" disabled="true"><br><br>
+				<input type="button" id="form1Submit" value="Submit">
+				<script>
+					document.getElementById("form1Gender8").onchange = function() {
+						document.getElementById("form1Gender9").disabled = !this.checked;
+					};
+				</script> 
+			</form>
+		</div>
+
+		<div id="neutral-good" class="selector" hidden="true">
+			<h3>just don't ask for gender because who the fuck needs to know</h3>
+		</div>
+
+		<div id="chaotic-good" class="selector" hidden="true">
+			<strong>Gender</strong><br>
+			<form>
+				<input type="text" id="form2Gender"><br><br>
+				<input type="button" id = "form2Submit" value="Submit">
+		</div>
+
+		<div id="lawful-neutral" class="selector" hidden="true">
+			<form>
+				<input type="radio" id="form3Gender1" value="male" name="form3Gender">
+				<label for="form3Gender1">Male</label><br>
+				<input type="radio" id="form3Gender2" value="female" name="form3Gender">
+				<label for="form3Gender2">Female</label><br>
+				<input type="radio" id="form3Gender3" value="enby" name="form3Gender">
+				<label for="form3Gender3">Non-Binary/third gender</label><br>
+				<input type="radio" id="form3Gender4" value="no-answer" name="form3Gender" selected="true">
+				<label for="form3Gender4">I prefer not to answer</label><br>
+				<input type="radio" id="form3Gender5" value="other" name="form3Gender">
+				<label for="form3Gender5">Other</label><br><br>
+				<input type="button" id="form3Submit" value="Submit">
+			</form>
+		</div>
+
+		<div id="true-neutral" class="selector" hidden="true">
+			<form>
+				<input type="radio" id="form4Gender1" value="male" name="form4Gender">
+				<label for="form4Gender1">Male</label><br>
+				<input type="radio" id="form4Gender2" value="female" name="form4Gender">
+				<label for="form4Gender2">Female</label><br>
+				<input type="radio" id="form4Gender3" value="other" name="form4Gender">
+				<label for="form4Gender3">Else</label><br>
+				<input type="radio" id="form4Gender4" value="no-answer" name="form4Gender" selected="true">
+				<label for="form4Gender4">Prefer not to answer</label><br><br>
+				<input type="button" id="form4Submit" value="Submit">
+			</form>
+		</div>
+
+		<div id="chaotic-neutral" class="selector" hidden="true">
+			<form>
+				<input type="radio" id="form5Gender1" value="male" name="form5Gender">
+				<label for="form5Gender1">Male</label><br>
+				<input type="radio" id="form5Gender2" value="female" name="form5Gender">
+				<label for="form5Gender2">Female</label><br>
+				<input type="radio" id="form5Gender3" value="custom" name="form5Gender">
+				<label for="form5Gender3">Custom</label>
+				<input type="button" id="form5Gender3-Fileupload-fake" name="custom-fake" value="Upload custom gender (max 10MB)" disabled="true">
+				<input type="file" id="form5Gender3-File" name="custom" hidden="true">
+				<label for="form5Gender3-File" id="form5Gender3-File-Label"></label><br><br>
+				<input type="button" id="form5Submit" value="Submit">
+			</form>
+			<script>
+				document.getElementById("form5Gender3-Fileupload-fake").addEventListener('click', e => {
+					// console.log("clicked the thingy");
+					document.getElementById("form5Gender3-File").click();
+				});
+
+				document.getElementById("form5Gender3-File").onchange = function() {
+					document.getElementById("form5Gender3-File-Label").innerHTML = this.value + " (" + ((this.files[0].size)/1024).toFixed(2) + " KB)";
+					if (this.files[0].size > 10485760) {
+						alert("File must be 10MB or smaller!");
+						document.getElementById("form5Submit").disabled = true;
+					} else {
+						document.getElementById("form5Submit").disabled = false;
+					};
+				};
+
+
+
+				document.getElementById("form5Gender3").onchange = function() {
+					document.getElementById("form5Gender3-Fileupload-fake").disabled = !document.getElementById("form5Gender3").checked;
+				};
+				document.getElementById("form5Gender2").onchange = function() {
+					document.getElementById("form5Gender3-Fileupload-fake").disabled = !document.getElementById("form5Gender3").checked;
+				};
+				document.getElementById("form5Gender1").onchange = function() {
+					document.getElementById("form5Gender3-Fileupload-fake").disabled = !document.getElementById("form5Gender3").checked;
+				};
+			</script> 
+		</div>
+
+
+
+		<div id="lawful-evil" class="selector" hidden="true">
+			<form>
+				<label for="form6GenderSelector"><br>Gender: </label>
+				<select name="form6GenderSelector" id="form6GenderSelector">
+						<option value="choose" selected="true" disabled="true">Choose</option>
+						<hr>
+						<option value="female">Female</option>
+						<option value="male">Male</option>
+				</select><br><br>
+				<input type="button" id="form6Submit" value="Submit">
+			</form>
+		</div>
+
+		<div id="neutral-evil" class="selector" hidden="true">
+			<form>
+				<input type="radio" id="form7Gender1" value="female" name="form7Gender">
+				<label for="form7Gender1">Female</label><br>
+				<input type="radio" id="form7Gender2" value="male" name="form7Gender">
+				<label for="form7Gender2">Male</label><br>
+				<input type="radio" id="form7Gender3" value="transgender" name="form7Gender">
+				<label for="form7Gender3">Transgender</label><br><br>
+				<input type="button" id="form7Submit" value="Submit">
+			</form>
+		</div>
+
+		<div id="chaotic-evil" class="selector" hidden="true">
+			<br>
+			<form>
+				<select name="form8GenderSelector" id="form8GenderSelector">
+					<option value="not-selected" selected="true">Please select gender</option>
+					<option value="male">Male</option>
+					<option value="female">Female</option>
+					<option value="venezuela">Venezuela</option>
+				</select><br><br>
+				<input type="button" id="form8Submit" value="Submit">
+			</form>
+		</div>
+
+		<div id="none-selected" class="selector">
+			<h3> To show a Gender-Selection-Screen, please select one from the drop-down list above!</h3>
+			<a>Note: Submitting the forms via the shown "Submit"-Buttons does absolutely nothing.</a><br>
+			<a>Uploading any file in Chaotic-Neutral also does nothing, and the file will not leave your computer.</a><br>
+			<a>Literally - as there is currently no way for the site to do anything with the submitted file</a>
+
+			<pre><font color="#26A269">arid@das-komputer-2</font>:<font color="#A2734C"><b>/media/arid/6261-3330/Music/Die Ärzte/Die Ärzte/Planet Punk</b></font> $ 
+</pre>
+		</div>
+	</body>
+</html>
