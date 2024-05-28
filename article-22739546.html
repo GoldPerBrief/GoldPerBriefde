@@ -35,19 +35,19 @@
         </div>
         <div class="comment-section">
             <iframe id="comments-iframe" src="assets/comment-section.html"></iframe>
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const commentsIframe = document.getElementById('comments-iframe');
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const commentsIframe = document.getElementById('comments-iframe');
 
-                        // Example base64 encoded JSON string for comments
-                        const encodedComments = 'W3siYXV0aG9yIjoiRGVyIEtsZWluZSBUaW1teSIsInRleHQiOiJJY2ggYmluIGluIGVpbmVuIEJydW5uZW4gZ2VmYWxsZW4hIEhpbGZlISIsInRpbWVzdGFtcCI6IjIwMjQtMDUtMjggMjo0OTowNCBQTSJ9LHsiYXV0aG9yIjoiUGVuaXNQdW1wZW5TaG9wMjQuZGUiLCJ0ZXh0Ijoi4pid77iP4pid77iP4pid77iPIFxuSGllciBnaWJ0cyBiaWxsaWcgUGVuaXNwdW1wZW4iLCJ0aW1lc3RhbXAiOiIyMDI0LTA1LTI4IDI6NDY6MTUgUE0ifV0=';
+                    // Example base64 encoded JSON string for comments
+                    const encodedComments = 'W3siYXV0aG9yIjoiRGVyIEtsZWluZSBUaW1teSIsInRleHQiOiJJY2ggYmluIGluIGVpbmVuIEJydW5uZW4gZ2VmYWxsZW4hIEhpbGZlISIsInRpbWVzdGFtcCI6IjIwMjQtMDUtMjggMjo0OTowNCBQTSJ9LHsiYXV0aG9yIjoiUGVuaXNQdW1wZW5TaG9wMjQuZGUiLCJ0ZXh0Ijoi4pid77iP4pid77iP4pid77iPIFxuSGllciBnaWJ0cyBiaWxsaWcgUGVuaXNwdW1wZW4iLCJ0aW1lc3RhbXAiOiIyMDI0LTA1LTI4IDI6NDY6MTUgUE0ifV0=';
 
-                        // Send the encoded comments to the iframe after it loads
-                        commentsIframe.onload = () => {
-                            commentsIframe.contentWindow.postMessage(encodedComments, '*');
-                        };
-                    });
-                </script>
+                    // Send the encoded comments to the iframe after it loads
+                    commentsIframe.onload = () => {
+                        commentsIframe.contentWindow.postMessage(encodedComments, '*');
+                    };
+                });
+            </script>
         </div>
     </div>
 </body>
