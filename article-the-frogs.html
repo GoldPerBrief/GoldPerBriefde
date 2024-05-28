@@ -4,63 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How The Left is using Chemicals to turn the frogs gay - and why thats a good thing</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            width: 80%;
-            max-width: 800px;
-            margin: 20px auto;
-            background: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .header, .content-image, .embed {
-            text-align: left;
-            margin: 20px 0;
-        }
-        .header img, .content-image img {
-            max-width: 100%;
-            height: auto;
-        }
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        .author {
-            font-size: 18px;
-            color: #555;
-            margin-bottom: 20px;
-        }
-        .article-timestamp {
-            font-size: 0.8em;
-            color: #666;
-            margin-top: 5px;
-        }
-        .article-content {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .related-link a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        .related-link a:hover {
-            text-decoration: underline;
-        }
-        .comment-section iframe {
-            width: 100%;
-            height: 600px;
-            border: none;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -96,8 +40,7 @@
                     document.addEventListener('DOMContentLoaded', () => {
                         const commentsIframe = document.getElementById('comments-iframe');
 
-                        // Example base64 encoded JSON string for comments
-                        const encodedComments = 'W3siYXV0aG9yIjoiRGVyIEtsZWluZSBUaW1teSIsInRleHQiOiJJY2ggYmluIGluIGVpbmVuIEJydW5uZW4gZ2VmYWxsZW4hIEhpbGZlISIsInRpbWVzdGFtcCI6IjIwMjMtMTEtMDggMjozNDo0NiBQTSJ9LHsiYXV0aG9yIjoiUGVuaXNQdW1wZW5TaG9wMjQuZGUiLCJ0ZXh0Ijoi4pid77iP4pid77iP4pid77iPIFxuSGllciBnaWJ0cyBiaWxsaWcgUGVuaXNwdW1wZW4iLCJ0aW1lc3RhbXAiOiIyMDIzLTExLTA4IDI6MzU6NDYgUE0ifV0=';
+                        const encodedComments = 'W3siYXV0aG9yIjoiRGVyIEtsZWluZSBUaW1teSAoMTAgSmFocmUpIiwidGV4dCI6IldhcnVtIGhpbGZ0IG1pciBkZW5uIG5pZW1hbmQgYXVzIGRpZXNlbSB2ZXJkYW1tdGVuIEJydW5uZW4/IEVzIGlzdCBkdW5rZWwgdW5kIGthbHQgaGllciEiLCJ0aW1lc3RhbXAiOiIyMDI0LTA0LTE3IDc6NDY6MDUgUE0ifSx7ImF1dGhvciI6IkVpbiBTY2jDvGxlciIsInRleHQiOiJXYXMgaXN0IGVpZ2VudGxpY2ggZXVlciBhbGxlciBQcm9ibGVtPyBTbyBmdW5rdGlvbmllcnQgZGFzIGRvY2ggZWggbmljaHQsIHVuZCBpaHIgc2FndCBkYXMgc28gYWxzIG9iIGRhIGlyZ2VuZGV0d2FzIG1pdCBmYWxzY2ggd8OkcmUuIiwidGltZXN0YW1wIjoiMjAyMy0xMS0xMCA1OjQzOjIzIFBNIn0seyJhdXRob3IiOiJEaWUgTcOkbm5saWNoa2VpdCIsInRleHQiOiJOYXTDvHJsaWNoLCBATcOkbm5saWNoZXIgTWFubi4gTGVpZGVyIGhhdHRlIGljaCBkaWVzZW4gQXNwZWt0IG5pY2h0IGJlZGFjaHQuIEdpYnQgZXMgZGEgZXR3YXMsIGRhcyB3aXIgdHVuIGvDtm5udGVuLCB1bSBkZW0gZW50Z2VnZW56dXdpcmtlbj9cblxuIEljaCwgbsOkbWxpY2gsIHfDvHJkZSB2b3JzY2hsYWdlbiwgZGFzcyB3aXIgYWxsZSBlaW5mYWNoIGRpZSBnYW56ZW4gS2luZGVyIGRhdm9uIGFiaGFsdGVuLCB2b24gZGVyIFJlZ2llcnVuZyBpbiBkZXIgU2NodWxlIFNjaHd1bCBnZW1hY2h0IHp1IHdlcmRlbi4iLCJ0aW1lc3RhbXAiOiIyMDIzLTExLTA5IDg6MjM6NTQgQU0ifSx7ImF1dGhvciI6Ik3DpG5ubGljaGVyIE1hbm4iLCJ0ZXh0IjoiTmF0w7xybGljaCBOaWNodCwgQERpZSBNw6RubmxpY2hrZWl0ISBcbkFiZXIgc29sbHRlbiB3aXIgbmljaHQgZGF2b24gYXVzZ2VoZW4ga8O2bm5lbiwgZGFzcyBkaWUgUmVnaWVydW5nIGF1Y2ggTWVuc2NoZW4gYmFsZCBTY2h3dWwgbWFjaGVuIGthbm4/IiwidGltZXN0YW1wIjoiMjAyMy0xMS0wOCAzOjUxOjQyIFBNIn0seyJhdXRob3IiOiJEaWUgTcOkbm5saWNoa2VpdCIsInRleHQiOiJATcOkbm5saWNoZXIgTWFubiwgaWNoIHdlacOfLCBkYXMgaGFiZW4gc2llIG1pdCBtaXIgYXVjaCBzY2hvbiB2ZXJzdWNodC5cblp1bSBHbMO8Y2sgYWJlciB3aXJkIGRhcyBuaWNodCBmdW5rdGlvbmllcmVuLCBkZW5uIGljaCBiaW4gamEga2VpbiBGcm9zY2gsIHVuZCBkdSBzaWNoZXIgYXVjaCBuaWNodCwgb2Rlcj8iLCJ0aW1lc3RhbXAiOiIyMDIzLTExLTA4IDM6MjM6MDQgUE0ifSx7ImF1dGhvciI6Ikdyw7xuZW4tQmFzaGluZy1NYW5uIiwidGV4dCI6IlZvbiBkZXIgUmVnaWVydW5nIHNjaHd1bCBnZW1hY2h0ZSBGcsO2c2NoZSBzaW5kIGphIG5pY2h0cyBpbSBWZXJnbGVpY2ggenVyIGFic3VyZGVuIFBvbGl0aWsgdm9uIEFubmFsZW5hIEJhZXJib2NrIHVuZCBpaHJlbiBHcsO8bmVuLUt1bXBhbmVuLCBkaWUgZ2VuYXVzbyByZWFsaXTDpHRzZmVybiBzaW5kIHdpZSBFaW5ow7ZybmVyIGF1ZiBkZW0gTWFycyEgI2diw7xnIiwidGltZXN0YW1wIjoiMjAyMy0xMS0wOCAzOjAxOjQ1IFBNIn0seyJhdXRob3IiOiJNw6RubmxpY2hlciBNYW5uIiwidGV4dCI6Ild1c3N0IGljaHMgZG9jaCEgU2NoZWnDnyBSZWdpZXJ1bmchIFdhcyBzb2xsIGRhcyFcbkljaCBicmF1Y2hlIG1laW5lIGdhbnogTk9STUFMRU4gSGV0ZXJvIEZyw7ZzY2hlIVxuV2FzIGtvbW10IGFscyBuw6RjaHN0ZXM/IFdvbGxlbiBkaWUgTUlDSCBzY2h3dWwgbWFjaGVuPyIsInRpbWVzdGFtcCI6IjIwMjMtMTEtMDggMjo0NTozNCBQTSJ9LHsiYXV0aG9yIjoiRGVyIEtsZWluZSBUaW1teSAoOSBKYWhyZSkiLCJ0ZXh0IjoiSWNoIGJpbiBpbiBlaW5lbiBCcnVubmVuIGdlZmFsbGVuISBIaWxmZSEiLCJ0aW1lc3RhbXAiOiIyMDIzLTExLTA4IDI6MzQ6NDYgUE0ifSx7ImF1dGhvciI6IlBlbmlzUHVtcGVuU2hvcDI0LmRlIiwidGV4dCI6IuKYne+4j+KYne+4j+KYne+4jyBcbkhpZXIgZ2lidHMgYmlsbGlnIFBlbmlzcHVtcGVuIiwidGltZXN0YW1wIjoiMjAyMy0xMS0wOCAyOjM1OjQ2IFBNIn1d';
 
                         // Send the encoded comments to the iframe after it loads
                         commentsIframe.onload = () => {
