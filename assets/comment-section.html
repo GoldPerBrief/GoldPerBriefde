@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comments Section</title>
+     <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="comments-section">
+    <h2>Comments</h2>
+    <div id="new-comment-form">
+        <input type="text" id="new-comment-author" placeholder="Your Name" required>
+        <textarea id="new-comment-text" placeholder="Your Comment" rows="4" required></textarea>
+        <button onclick="postComment()">Post Comment</button>
+    </div>
+    <div id="comments-list">
+        <!-- Comments will be inserted here -->
+    </div>
+</div>
+
+<script>
+    let currentComments = [];
+
+    // Function to decode base64 and parse JSON (UTF-16)
+    function loadComments(encodedData) {
+        try {
+            const decodedData = decodeURIComponent(escape(atob(encodedData)));
+            const comments = JSON.parse(decodedData);
+            currentComments = comments;
+            renderComments(currentComments);
+        } catch (e) {
+            console.error('Error decoding or parsing comments:', e);
+        }
+    }
+
+    // Function to render comments
+        function renderComments(comments) {
+            const commentsList = document.getElementById('comments-list');
+            commentsList.innerHTML = ''; // Clear existing comments
+
+            comments.forEach(comment => {
+                const commentDiv = document.createElement('div');
+                commentDiv.className = 'comment';
+
+                const authorDiv = document.createElement('div');
+                authorDiv.className = 'comment-author';
+                authorDiv.textContent = comment.author;
+
+                const textDiv = document.createElement('div');
+                textDiv.className = 'comment-text';
+                // Replace newline characters with <br> tags and preserve emojis
+                textDiv.innerHTML = comment.text.replace(/\n/g, '<br>');
+
+                const timestampDiv = document.createElement('div');
+                timestampDiv.className = 'comment-timestamp';
+                timestampDiv.textContent = comment.timestamp;
+
+                commentDiv.appendChild(authorDiv);
+                commentDiv.appendChild(textDiv);
+                commentDiv.appendChild(timestampDiv);
+                commentsList.appendChild(commentDiv);
+            });
+        }
+
+
+    // Function to handle posting a new comment
+    function postComment() {
+        const authorInput = document.getElementById('new-comment-author');
+        const textInput = document.getElementById('new-comment-text');
+        const author = authorInput.value.trim();
+        const text = textInput.value.trim();
+
+        if (author && text) {
+            const timestamp = new Date().toLocaleString();
+            const newComment = { author, text, timestamp };
+            currentComments.unshift(newComment);
+            renderComments(currentComments);
+            authorInput.value = '';
+            textInput.value = '';
+        } else {
+            alert('Please enter both your name and comment.');
+        }
+    }
+
+    // Listen for messages from the parent window
+    window.addEventListener('message', (event) => {
+        if (event.data) {
+            loadComments(event.data);
+        }
+    });
+</script>
+
+</body>
+</html>

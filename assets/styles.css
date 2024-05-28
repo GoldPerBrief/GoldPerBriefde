@@ -1,0 +1,48 @@
+/* comments.css */
+body {
+    font-family: Arial, sans-serif;
+}
+#comments-section {
+    max-width: 600px;
+    margin: 20px auto;
+}
+.comment {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.comment-author {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.comment-text {
+    margin-top: 5px;
+}
+.comment-timestamp {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 5px;
+}
+#new-comment-form {
+    margin-bottom: 20px;
+}
+#new-comment-form input,
+#new-comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+#new-comment-form button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#new-comment-form button:hover {
+    background-color: #0056b3;
+}
