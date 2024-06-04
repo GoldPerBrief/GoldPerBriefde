@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Der "coole" escaperoom</title>
+    <title>Der "coole" escaperoom</title>
+    <style>
+        body {
+            overflow: hidden;
+        }
+        .bg_image {
+            height: 100%;
+            width: 100%;
+            center: center;
+        }
+    </style>
 </head>
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -25,7 +35,7 @@ $(document).ready(function() {
 });
 </script>
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Avatar_cat.png" height="256" width="256" alt="kitten">
+<img class="bg_image" src="./assets/bg_01.png" height="256" width="256" alt="kitten">
 
 <script>
  // https://stackoverflow.com/questions/34867066/javascript-mouse-click-coordinates-for-image
