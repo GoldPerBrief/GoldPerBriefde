@@ -28,11 +28,10 @@
             object-fit: contain;
             position: relative;
         }
-        .highlight {
+        .highlight_image {
             position: absolute;
-            border: 2px solid red;
-            pointer-events: none;
             display: none;
+            pointer-events: none;
         }
         .footer-text {
             position: fixed;
@@ -47,14 +46,14 @@
 <body>
     <img id="bg_01" class="bg_image" src="./assets/background_01.png" alt="Bild">
     <img id="hidden_01" class="hidden_image" src="./assets/hidden_01.png" alt="Verstecktes Bild">
-    <div id="highlightBox" class="highlight"></div>
+    <img id="highlightImage" class="highlight_image" src="" alt="Highlight Bild">
     <div id="loadingText" class="footer-text">Laden... Bitte warten.</div>
 
     <script>
         const hiddenImageId = "hidden_01";
         const mainImage = document.getElementById("bg_01");
         const hiddenImage = document.getElementById(hiddenImageId);
-        const highlightBox = document.getElementById('highlightBox');
+        const highlightImage = document.getElementById('highlightImage');
 
         hiddenImage.crossOrigin = "Anonymous";
 
@@ -72,10 +71,9 @@
             performActionBasedOnPixelColorHover(x, y, (color) => {
                 if (color !== null) {
                     highlightSimilarColorAreas(color);
-                    highlightBox.style.display = 'inline-block';
                     mainImage.style.cursor = 'pointer';
                 } else {
-                    highlightBox.style.display = 'none';
+                    highlightImage.style.display = 'none';
                     mainImage.style.cursor = 'default';
                 }
             });
@@ -152,13 +150,14 @@
                 const widthRatio = rect.width / hiddenImage.width;
                 const heightRatio = rect.height / hiddenImage.height;
 
-                highlightBox.style.left = `${rect.left + minX * widthRatio}px`;
-                highlightBox.style.top = `${rect.top + minY * heightRatio}px`;
-                highlightBox.style.width = `${(maxX - minX) * widthRatio}px`;
-                highlightBox.style.height = `${(maxY - minY) * heightRatio}px`;
-                highlightBox.style.display = 'block';
+                highlightImage.style.left = `${rect.left + minX * widthRatio}px`;
+                highlightImage.style.top = `${rect.top + minY * heightRatio}px`;
+                highlightImage.style.width = `${(maxX - minX) * widthRatio}px`;
+                highlightImage.style.height = `${(maxY - minY) * heightRatio}px`;
+                highlightImage.style.display = 'block';
+                highlightImage.src = `./assets/highlights/highlight_${color.r}_${color.g}_${color.b}.png`;
             } else {
-                highlightBox.style.display = 'none';
+                highlightImage.style.display = 'none';
             }
         }
 
