@@ -6,54 +6,89 @@
         body {
             overflow: hidden;
         }
+        .hidden_image {
+            height:100%;
+            width:100%;
+            center:center;
+            visibility: hidden;
+        }
         .bg_image {
             height: 100%;
             width: 100%;
             center: center;
         }
     </style>
+    <script>
+        var coordinateListX = [[100,1000],[500,1500]];
+        var coordinateListY = [[0,500],[500,1500]];
+        var functionIdList = [0,1];
+
+        function performActionBasedOnPixelColor(hiddenImageId, x, y) {
+            // Das versteckte Bild und dessen Kontext holen
+            const hiddenImage = document.getElementById(hiddenImageId);
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // Sicherstellen, dass das Bild geladen ist
+            if (!hiddenImage.complete) {
+                hiddenImage.onload = () => {
+                    performActionBasedOnPixelColor(hiddenImageId, x, y);
+                };
+                return;
+            }
+
+            // Canvas-Größe auf die Größe des Bildes setzen
+            canvas.width = hiddenImage.width;
+            canvas.height = hiddenImage.height;
+
+            // Bild auf das Canvas zeichnen
+            ctx.drawImage(hiddenImage, 0, 0);
+
+            // Pixel-Daten an der angegebenen Position abrufen
+            const imageData = ctx.getImageData(x, y, 1, 1);
+            const pixel = imageData.data;
+
+            // RGB-Werte des Pixels erhalten
+            const r = pixel[0];
+            const g = pixel[1];
+            const b = pixel[2];
+
+            // Bestimmte Funktion basierend auf der Farbe des Pixels ausführen
+            if (r === 255 && g === 0 && b === 0) { // Beispiel: Wenn der Pixel rot ist
+                performRedAction();
+            } else if (r === 0 && g === 255 && b === 0) { // Beispiel: Wenn der Pixel grün ist
+                performGreenAction();
+            } else if (r === 0 && g === 0 && b === 255) { // Beispiel: Wenn der Pixel blau ist
+                performBlueAction();
+            } else {
+                performDefaultAction();
+            }
+        }
+
+        function performRedAction() {
+            console.log("Rot erkannt! Aktion für Rot ausführen.");
+            alert("Madeline Clicked");
+        }
+
+        function performGreenAction() {
+            console.log("Grün erkannt! Aktion für Grün ausführen.");
+            alert("Sonnenbrand!");
+        }
+
+        function performBlueAction() {
+            console.log("Blau erkannt! Aktion für Blau ausführen.");
+            alert("wind, wind, wind")
+        }
+
+        function performDefaultAction() {
+            console.log("Keine spezifische Farbe erkannt. Standardaktion ausführen.");
+        }
+
+    </script>
 </head>
 <body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <img id="hidden_01" class="hidden_image" src="./assets/hidden_01.png">
+    <img id="01" class="bg_image" src="./assets/background_01.png" alt="bild">
 
-<script>
-$(document).ready(function() {
-    $("img").on("click", function(event) {
-        bounds=this.getBoundingClientRect();
-        var left=bounds.left;
-        var top=bounds.top;
-        var x = event.pageX - left;
-        var y = event.pageY - top;
-        var cw=this.clientWidth
-        var ch=this.clientHeight
-        var iw=this.naturalWidth
-        var ih=this.naturalHeight
-        var px=x/cw*iw
-        var py=y/ch*ih
-        alert("click on "+this.tagName+" at pixel ("+px+","+py+") mouse pos ("+x+"," + y+ ") relative to boundingClientRect at ("+left+","+top+") client image size: "+cw+" x "+ch+" natural image size: "+iw+" x "+ih );
-    });
-});
-</script>
-
-<img class="bg_image" src="./assets/bg_01.png" height="256" width="256" alt="kitten">
-
-<script>
- // https://stackoverflow.com/questions/34867066/javascript-mouse-click-coordinates-for-image
-  document.getElementById(imageid).addEventListener('click', function (event) {
-    // https://stackoverflow.com/a/288731/1497139
-    bounds=this.getBoundingClientRect();
-    var left=bounds.left;
-    var top=bounds.top;
-    var x = event.pageX - left;
-    var y = event.pageY - top;
-    var cw=this.clientWidth
-    var ch=this.clientHeight
-    var iw=this.naturalWidth
-    var ih=this.naturalHeight
-    var px=x/cw*iw
-    var py=y/ch*ih
-    alert("click on "+this.tagName+" at pixel ("+px+","+py+") mouse pos ("+x+"," + y+ ") relative to boundingClientRect at ("+left+","+top+") client image size: "+cw+" x "+ch+" natural image size: "+iw+" x "+ih );
-  });
-</script>
 </body>
 </html>
