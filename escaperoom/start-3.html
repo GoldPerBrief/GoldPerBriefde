@@ -41,6 +41,44 @@
             background: rgba(255, 255, 255, 0.8);
             padding: 10px;
         }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .iframe-container {
+            position: relative;
+            width: 50%;
+            height: 50%;
+            background: white;
+        }
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .iframe-container .close-btn,
+        .iframe-container .refresh-btn {
+            position: absolute;
+            top: 5px;
+            padding: 5px 10px;
+            background: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .iframe-container .close-btn {
+            right: 50px;
+        }
+        .iframe-container .refresh-btn {
+            right: 5px;
+        }
     </style>
 </head>
 <body>
@@ -48,12 +86,21 @@
     <img id="hidden_01" class="hidden_image" src="./assets/hidden_01.png" alt="Verstecktes Bild">
     <img id="highlightImage" class="highlight_image" src="" alt="Highlight Bild">
     <div id="loadingText" class="footer-text">Laden... Bitte warten.</div>
+    <div id="overlay" class="overlay">
+        <div class="iframe-container">
+            <iframe id="actionIframe" src=""></iframe>
+            <button class="close-btn" onclick="closeIframe()">Schließen</button>
+            <button class="refresh-btn" onclick="refreshIframe()">Neu laden</button>
+        </div>
+    </div>
 
     <script>
         const hiddenImageId = "hidden_01";
         const mainImage = document.getElementById("bg_01");
         const hiddenImage = document.getElementById(hiddenImageId);
         const highlightImage = document.getElementById('highlightImage');
+        const overlay = document.getElementById('overlay');
+        const actionIframe = document.getElementById('actionIframe');
 
         hiddenImage.crossOrigin = "Anonymous";
 
@@ -196,21 +243,38 @@
 
         function performRedAction() {
             console.log("Rot erkannt! Aktion für Rot ausführen.");
-            alert("Madeline Clicked");
+            showIframe('https://example.com/red');
         }
 
         function performGreenAction() {
             console.log("Grün erkannt! Aktion für Grün ausführen.");
-            alert("Sonnenbrand!");
+            showIframe('https://example.com/green');
         }
 
         function performBlueAction() {
             console.log("Blau erkannt! Aktion für Blau ausführen.");
-            alert("wind, wind, wind");
+            showIframe('https://example.com/blue');
         }
 
         function performDefaultAction() {
             console.log("Keine spezifische Farbe erkannt. Standardaktion ausführen.");
+        }
+
+        function showIframe(url) {
+            actionIframe.src = url;
+            overlay.style.display = 'flex';
+            mainImage.removeEventListener("mousemove", handleMouseMove);
+            mainImage.style.cursor = 'default';
+            highlightImage.style.display = 'none';
+        }
+
+        function closeIframe() {
+            overlay.style.display = 'none';
+            mainImage.addEventListener("mousemove", handleMouseMove);
+        }
+
+        function refreshIframe() {
+            actionIframe.contentWindow.location.reload();
         }
 
         window.addEventListener('load', () => {
