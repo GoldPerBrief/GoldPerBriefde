@@ -278,25 +278,36 @@
             console.log("Keine spezifische Farbe erkannt. Standardaktion ausführen.");
         }
         
-        function showIframe(url) {
-            actionIframe.src = url;
+    function showIframe(url) {
+            // Adjust iframe loading to bypass third-party cookie blocking
+            actionIframe.src = 'about:blank';
+            actionIframe.contentWindow.location.replace(url);
             overlay.style.display = 'flex';
             mainImage.removeEventListener("mousemove", handleMouseMove);
             mainImage.style.cursor = 'default';
             highlightImage.style.display = 'none';
+            // Enable close button functionality
+            closeBtn.addEventListener('click', closeIframe);
         }
 
         function closeIframe() {
             overlay.style.display = 'none';
             mainImage.addEventListener("mousemove", handleMouseMove);
-        }
-
-        function refreshIframe() {
-            actionIframe.contentWindow.location.reload();
+            // Remove event listener for close button after closing iframe
+            closeBtn.removeEventListener('click', closeIframe);
         }
 
         window.addEventListener('load', () => {
             hiddenImage.onload();
+
+            // Check if autoplay is allowed and adjust behavior accordingly
+            if (actionIframe.contentDocument) {
+                actionIframe.contentDocument.addEventListener('DOMContentLoaded', function () {
+                    actionIframe.contentDocument.querySelector('video').play().catch(function () {
+                        console.log('Autoplay is not allowed.');
+                    });
+                });
+            }
         });
     </script>
 </body>
