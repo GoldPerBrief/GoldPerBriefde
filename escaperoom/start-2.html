@@ -9,27 +9,36 @@
             margin: 0;
             height: 100%;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
         .hidden_image {
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            visibility: hidden;
+            display: none;
         }
         .bg_image {
             position: absolute;
-            top: 0%;
-            left: 0%;
+            /*top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);*/
             width: 100%;
-            height: auto;
-            max-height: 100%;
-            max-width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
         .highlight {
             position: absolute;
             border: 2px solid red;
             pointer-events: none;
             display: none;
+        }
+        .footer-text {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
         }
     </style>
 </head>
@@ -47,12 +56,6 @@
         hiddenImage.crossOrigin = "Anonymous";
 
         hiddenImage.onload = () => {
-            const mainCanvas = document.createElement("canvas");
-            const ctx = mainCanvas.getContext("2d");
-            mainCanvas.width = hiddenImage.width;
-            mainCanvas.height = hiddenImage.height;
-            ctx.drawImage(hiddenImage, 0, 0);
-
             mainImage.addEventListener("mousemove", (event) => {
                 const rect = mainImage.getBoundingClientRect();
                 const x = Math.round((event.clientX - rect.left) * (hiddenImage.width / rect.width));
@@ -138,10 +141,14 @@
             }
 
             if (minX <= maxX && minY <= maxY) {
-                highlightBox.style.left = `${minX}px`;
-                highlightBox.style.top = `${minY}px`;
-                highlightBox.style.width = `${maxX - minX}px`;
-                highlightBox.style.height = `${maxY - minY}px`;
+                const rect = mainImage.getBoundingClientRect();
+                const widthRatio = rect.width / hiddenImage.width;
+                const heightRatio = rect.height / hiddenImage.height;
+
+                highlightBox.style.left = `${rect.left + minX * widthRatio}px`;
+                highlightBox.style.top = `${rect.top + minY * heightRatio}px`;
+                highlightBox.style.width = `${(maxX - minX) * widthRatio}px`;
+                highlightBox.style.height = `${(maxY - minY) * heightRatio}px`;
                 highlightBox.style.display = 'block';
             } else {
                 highlightBox.style.display = 'none';
@@ -197,7 +204,11 @@
         function performDefaultAction() {
             console.log("Keine spezifische Farbe erkannt. Standardaktion ausführen.");
         }
+
+        window.addEventListener('load', () => {
+            hiddenImage.onload();
+        });
     </script>
-    <a>Hier unten ist nichts!</a>
+    <div class="footer-text">Laden... Bitte warten.</div>
 </body>
 </html>
