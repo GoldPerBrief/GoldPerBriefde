@@ -58,6 +58,9 @@
             height: 50%;
             background: white;
             border: 5px solid #d2b48c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .iframe-container iframe {
             width: 100%;
@@ -103,7 +106,7 @@
     <div id="loadingText" class="footer-text">Laden... Bitte warten.</div>
     <div id="overlay" class="overlay">
         <div class="iframe-container">
-            <iframe id="actionIframe" src=""></iframe>
+            <iframe id="actionIframe" src="" sandbox="allow-scripts allow-same-origin"></iframe>
             <button class="close-btn" onclick="closeIframe()"></button>
             <button class="refresh-btn" onclick="refreshIframe()"></button>
         </div>
@@ -274,7 +277,7 @@
         function performDefaultAction() {
             console.log("Keine spezifische Farbe erkannt. Standardaktion ausführen.");
         }
-
+        
         function showIframe(url) {
             actionIframe.src = url;
             overlay.style.display = 'flex';
