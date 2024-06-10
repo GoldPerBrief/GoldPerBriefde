@@ -67,10 +67,10 @@
             height: 100%;
             border: 2px solid #d2b48c;
         }
-        .iframe-container .close-btn,
-        .iframe-container .refresh-btn {
+        .iframe-container .close-btn {
             position: absolute;
             top: 5px;
+            right: 5px; /* Adjusted position */
             width: 30px;
             height: 30px;
             background: #d2b48c;
@@ -81,19 +81,8 @@
             align-items: center;
             border-radius: 50%;
         }
-        .iframe-container .close-btn {
-            right: 45px;
-        }
-        .iframe-container .refresh-btn {
-            right: 5px;
-        }
         .iframe-container .close-btn::before {
             content: '✖'; /* Unicode character for a close icon */
-            font-size: 16px;
-            color: white;
-        }
-        .iframe-container .refresh-btn::before {
-            content: '⟳'; /* Unicode character for a refresh icon */
             font-size: 16px;
             color: white;
         }
@@ -107,8 +96,7 @@
     <div id="overlay" class="overlay">
         <div class="iframe-container">
             <iframe id="actionIframe" src="" sandbox="allow-scripts allow-same-origin"></iframe>
-            <button class="close-btn" onclick="closeIframe()"></button>
-            <button class="refresh-btn" onclick="refreshIframe()"></button>
+            <button class="close-btn" id="closeBtn"></button> <!-- Added ID to the close button -->
         </div>
     </div>
 
@@ -119,6 +107,7 @@
         const highlightImage = document.getElementById('highlightImage');
         const overlay = document.getElementById('overlay');
         const actionIframe = document.getElementById('actionIframe');
+        const closeBtn = document.getElementById('closeBtn'); // Added
 
         hiddenImage.crossOrigin = "Anonymous";
 
@@ -278,7 +267,7 @@
             console.log("Keine spezifische Farbe erkannt. Standardaktion ausführen.");
         }
         
-    function showIframe(url) {
+        function showIframe(url) {
             // Adjust iframe loading to bypass third-party cookie blocking
             actionIframe.src = 'about:blank';
             actionIframe.contentWindow.location.replace(url);
