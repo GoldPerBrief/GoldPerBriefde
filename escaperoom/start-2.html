@@ -63,8 +63,9 @@
 
 hiddenImage.onload = () => {
     mainImage.addEventListener("mousemove", (event) => {
-        const x = Math.round(event.offsetX * (hiddenImage.width / mainImage.width));
-        const y = Math.round(event.offsetY * (hiddenImage.height / mainImage.height));
+       const rect = mainImage.getBoundingClientRect();
+        const x = Math.round((event.offsetX / rect.width) * hiddenImage.width);
+        const y = Math.round((event.offsetY / rect.height) * hiddenImage.height);
 
         performActionBasedOnPixelColorHover(x, y, (color) => {
             if (color !== null) {
@@ -79,8 +80,9 @@ hiddenImage.onload = () => {
     });
 
     mainImage.addEventListener("click", (event) => {
-      const x = Math.round(event.offsetX * (hiddenImage.width / mainImage.width));
-        const y = Math.round(event.offsetY * (hiddenImage.height / mainImage.height));
+             const rect = mainImage.getBoundingClientRect();
+        const x = Math.round((event.offsetX / rect.width) * hiddenImage.width);
+        const y = Math.round((event.offsetY / rect.height) * hiddenImage.height);
 
         performActionBasedOnPixelColor(x, y);
     });
