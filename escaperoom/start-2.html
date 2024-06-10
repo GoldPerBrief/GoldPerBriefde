@@ -55,6 +55,13 @@
     <div id="highlightBox" class="highlight"></div>
 
     <script>
+
+         const hiddenImageId = "hidden_01";
+        const mainImage = document.getElementById("bg_01");
+        const hiddenImage = document.getElementById(hiddenImageId);
+        const highlightBox = document.getElementById('highlightBox');
+
+        hiddenImage.crossOrigin = "Anonymous";
         window.addEventListener('load', () => {
     hiddenImage.onload();
     document.getElementById("loadingText").style.display = 'none';
