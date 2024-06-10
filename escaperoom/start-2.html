@@ -208,7 +208,13 @@
         window.addEventListener('load', () => {
             hiddenImage.onload();
         });
+
+        window.addEventListener('load', () => {
+            hiddenImage.onload();
+            document.getElementById("loadingText").style.display = 'none';
+        });
+
     </script>
-    <div class="footer-text">Laden... Bitte warten.</div>
+    <div id="loadingText" class="footer-text">Laden... Bitte warten.</div>
 </body>
 </html>
