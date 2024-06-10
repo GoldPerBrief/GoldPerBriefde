@@ -7,7 +7,7 @@
             overflow: hidden;
         }
         .hidden_image {
-            height:100%;
+            height:0%;
             width:100%;
             center:center;
             visibility: hidden;
@@ -18,14 +18,33 @@
             center: center;
         }
     </style>
+
+</head>
+<body>
+    <img id="bg_01" class="bg_image" src="./assets/background_01.png" alt="bild">
+    <img id="hidden_01" class="hidden_image" src="./assets/hidden_01.png">
+
+
     <script>
         var coordinateListX = [[100,1000],[500,1500]];
         var coordinateListY = [[0,500],[500,1500]];
         var functionIdList = [0,1];
 
+        document.getElementById("bg_01").addEventListener("click", function (event) {
+            var rect = this.getBoundingClientRect();
+            var x = event.clientX - rect.left;
+            var y = event.clientY - rect.top;
+
+
+            console.log(x);
+            console.log(y);
+            performActionBasedOnPixelColor("hidden_01", x, y);
+        })
+
         function performActionBasedOnPixelColor(hiddenImageId, x, y) {
             // Das versteckte Bild und dessen Kontext holen
             const hiddenImage = document.getElementById(hiddenImageId);
+            hiddenImage.crossOrigin = "Anonymous";
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
 
@@ -42,27 +61,37 @@
             canvas.height = hiddenImage.height;
 
             // Bild auf das Canvas zeichnen
-            ctx.drawImage(hiddenImage, 0, 0);
-
-            // Pixel-Daten an der angegebenen Position abrufen
-            const imageData = ctx.getImageData(x, y, 1, 1);
-            const pixel = imageData.data;
-
-            // RGB-Werte des Pixels erhalten
-            const r = pixel[0];
-            const g = pixel[1];
-            const b = pixel[2];
-
-            // Bestimmte Funktion basierend auf der Farbe des Pixels ausführen
-            if (r === 255 && g === 0 && b === 0) { // Beispiel: Wenn der Pixel rot ist
-                performRedAction();
-            } else if (r === 0 && g === 255 && b === 0) { // Beispiel: Wenn der Pixel grün ist
-                performGreenAction();
-            } else if (r === 0 && g === 0 && b === 255) { // Beispiel: Wenn der Pixel blau ist
-                performBlueAction();
-            } else {
-                performDefaultAction();
+            try {
+                ctx.drawImage(hiddenImage, 0, 0);
+            } catch (e) {
+                console.error("Fehler beim Zeicnen des Bildes auf dem Canvas: ", e);
+                return;
             }
+
+            try {
+                // Pixel-Daten an der angegebenen Position abrufen
+                const imageData = ctx.getImageData(x, y, 1, 1);
+                const pixel = imageData.data;
+
+                // RGB-Werte des Pixels erhalten
+                const r = pixel[0];
+                const g = pixel[1];
+                const b = pixel[2];
+
+                // Bestimmte Funktion basierend auf der Farbe des Pixels ausführen
+                if (r === 255 && g === 0 && b === 0) { // Beispiel: Wenn der Pixel rot ist
+                    performRedAction();
+                } else if (r === 0 && g === 255 && b === 0) { // Beispiel: Wenn der Pixel grün ist
+                    performGreenAction();
+                } else if (r === 0 && g === 0 && b === 255) { // Beispiel: Wenn der Pixel blau ist
+                    performBlueAction();
+                } else {
+                    performDefaultAction();
+                }
+            } catch (e) {
+                console.error("Fehler beim Abrufen der Pixel-Daten:", e);
+            }
+
         }
 
         function performRedAction() {
@@ -85,10 +114,5 @@
         }
 
     </script>
-</head>
-<body>
-    <img id="hidden_01" class="hidden_image" src="./assets/hidden_01.png">
-    <img id="01" class="bg_image" src="./assets/background_01.png" alt="bild">
-
 </body>
 </html>
