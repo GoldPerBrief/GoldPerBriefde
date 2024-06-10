@@ -201,6 +201,36 @@ function performActionBasedOnPixelColor(x, y) {
 }
 
 
+        function performRedAction() {
+            console.log("Rot erkannt! Aktion für Rot ausführen.");
+            alert("Madeline Clicked");
+        }
+
+        function performGreenAction() {
+            console.log("Grün erkannt! Aktion für Grün ausführen.");
+            alert("Sonnenbrand!");
+        }
+
+        function performBlueAction() {
+            console.log("Blau erkannt! Aktion für Blau ausführen.");
+            alert("wind, wind, wind");
+        }
+
+        function performDefaultAction() {
+            console.log("Keine spezifische Farbe erkannt. Standardaktion ausführen.");
+        }
+
+        window.addEventListener('load', () => {
+            hiddenImage.onload();
+        });
+
+        window.addEventListener('load', () => {
+            hiddenImage.onload();
+            document.getElementById("loadingText").style.display = 'none';
+        });
+
+
+
     </script>
     <div id="loadingText" class="footer-text">Laden... Bitte warten.</div>
 </body>
