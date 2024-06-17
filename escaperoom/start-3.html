@@ -299,10 +299,11 @@
         function verifyCode(code, id) {
             switch (id) {
             case 1:
-                let korrekterCode = '8394';
+                korrekterCode = '8394';
                 break;
             default:
-                let korrekterCode = '0000';
+                korrekterCode = '0000';
+                break;
             }
             if (code === korrekterCode) {
                 alert("Code stümmt");
