@@ -309,9 +309,9 @@
 
         window.addEventListener('message', function(event) {
             try {
-                closeIframe();
                 const messageData = JSON.parse(event.data);
                 if (messageData.type === 'codeSubmission') {
+                    closeIframe();
                     verifyCode(messageData.code);
                 }
             } catch (e) {
