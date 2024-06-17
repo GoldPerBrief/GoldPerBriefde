@@ -313,11 +313,11 @@
 
         window.addEventListener('message', function(event) {
             try {
+                closeIframe();
                 const messageData = JSON.parse(event.data);
                 if (messageData.type === 'codeSubmission') {
-                    verifyCode(messageData.code);
+                    verifyCode(messageData.code, 1);
                 }
-                closeIframe();
             } catch (e) {
                 console.error('Invalid message data', e);
             }
