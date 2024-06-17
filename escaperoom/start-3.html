@@ -108,6 +108,7 @@
         const overlay = document.getElementById('overlay');
         const actionIframe = document.getElementById('actionIframe');
         const closeBtn = document.getElementById('closeBtn'); // Added
+        codeId = 0;
 
         hiddenImage.crossOrigin = "Anonymous";
 
@@ -258,7 +259,8 @@
             // showIframe('https://learningapps.org/watch?app=32557273');
 
             // Codeeingabe
-            ergebnis = codeEingabe(1);
+            codeId = 1;
+            ergebnis = codeEingabe();
         }
 
         function performBlueAction() {
@@ -271,32 +273,26 @@
             console.log("Keine spezifische Farbe erkannt. Standardaktion ausführen.");
         }
 
-        function codeEingabe(nummer) {
-            switch (nummer) {
-            case 1:
-                const params = {
-                    length: 4,
-                    charset: 'numeric'
-                };
+        function codeEingabe() {
+            const params = {
+                length: 4,
+                charset: 'numeric'
+            };
 
-                const base64Params = btoa(JSON.stringify(params));
+            const base64Params = btoa(JSON.stringify(params));
 
-                const iframe = document.getElementById("actionIframe");
-                showIframe("./assets/embed/embedCodeInput.html");
+            const iframe = document.getElementById("actionIframe");
+            showIframe("./assets/embed/embedCodeInput.html");
 
-                iframe.onload = function() {
-                    iframe.contentWindow.postMessage(base64Params, '*');
-                }
-
-
-            default:
-                console.log("Da hat leider etwas nicht funktioniert.")
-                return false;
+            iframe.onload = function() {
+                iframe.contentWindow.postMessage(base64Params, '*');
             }
+
+
         }
         
-        function verifyCode(code, id) {
-            switch (id) {
+        function verifyCode(code) {
+            switch (codeId) {
             case 1:
                 korrekterCode = '8394';
                 break;
@@ -316,7 +312,7 @@
                 closeIframe();
                 const messageData = JSON.parse(event.data);
                 if (messageData.type === 'codeSubmission') {
-                    verifyCode(messageData.code, 1);
+                    verifyCode(messageData.code);
                 }
             } catch (e) {
                 console.error('Invalid message data', e);
