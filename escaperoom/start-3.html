@@ -275,18 +275,54 @@
             let foo = window.promt("Code?");
             switch (nummer) {
             case 1:
-                console.log(foo, nummer)
-                if (foo == 8394) {
-                    return true;
-                } else {
-                    return false;
+                const params = {
+                    length: 4,
+                    charset: 'numeric'
+                };
+
+                const base64Params = btoa(JSON.stringify(params));
+
+                const iframe = document.getElementById("actionIframe");
+                showIframe("./assets/embed/embedCodeInput.html");
+
+                iframe.onload = function() {
+                    iframe.contentWindow.postMessage(base64Params, '*');
                 }
+
+
             default:
                 console.log("Da hat leider etwas nicht funktioniert.")
                 return false;
             }
         }
         
+        function verifyCode(code, id) {
+            switch (id) {
+            case 1:
+                let korrekterCode = '8394';
+                break;
+            default:
+                let korrekterCode = '0000';
+            }
+            if (code === korrekterCode) {
+                alert("Code stümmt");
+            } else {
+                alert("leider falsch!")
+            }
+        }
+
+        window.addEventListener('message', function(event) {
+            try {
+                const messageData = JSON.parse(event.data);
+                if (messageData.type === 'codeSubmission') {
+                    verifyCode(messageData.code);
+                }
+                closeIframe();
+            } catch (e) {
+                console.error('Invalid message data', e);
+            }
+        });
+
         function showIframe(url) {
             // Adjust iframe loading to bypass third-party cookie blocking
             actionIframe.src = 'about:blank';

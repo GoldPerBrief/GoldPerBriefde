@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="UTF-8">
+	<title>Code Eingabe</title>
+	<script>
+		window.addEventListener('message', function(event) {
+			try {
+				const params = JSON.parse(atob(event.data));
+				const { length, charset } = params;
+
+				const input = document.getElementById('code-input');
+				input.setAttribute('maxLength', length);
+
+				if (charset === 'numeric') {
+					input.setAttribute('pattern', '\\d*');
+				} else if (charset === 'alphanumeric') {
+					input.setAttribute('pattern', '[A-Za-z0-9]*');
+				}
+
+				document.getElementById('form-container').style.display = 'block';
+			} catch (e) {
+				console.error('Invalid message data', e);
+			}
+		});
+
+		function sendCode(event) {
+			event.preventDefault();
+			const code = document.getElementById('code-input').value;
+			const message = JSON.stringify({type: 'codeSubmission', code});
+			window.parent.postMessage(message, '*');
+		}
+	</script>
+</head>
+<body>
+	<div id="form-container" style="display: none;">
+		<form onsubmit="sendCode(event)">
+			<label for="code-input">Code?</label>
+			<input type="text" id="code-input" required>
+			<button type="submit">Überprüfen</button>
+		</form>
+	</div>
+</body>
+</html>
