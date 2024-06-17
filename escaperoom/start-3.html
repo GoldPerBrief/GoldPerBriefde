@@ -254,17 +254,38 @@
         }
 
         function performGreenAction() {
-            console.log("Grün erkannt! Aktion für Grün ausführen.");
-            showIframe('https://learningapps.org/watch?app=32557273');
+            // console.log("Grün erkannt! Aktion für Grün ausführen.");
+            // showIframe('https://learningapps.org/watch?app=32557273');
+
+            // Codeeingabe
+            ergebnis = codeEingabe(1);
         }
 
         function performBlueAction() {
             console.log("Blau erkannt! Aktion für Blau ausführen.");
             showIframe('https://learningapps.org/watch?v=pvz63fmik24');
+            /* Code: 8394*/
         }
 
         function performDefaultAction() {
             console.log("Keine spezifische Farbe erkannt. Standardaktion ausführen.");
+        }
+
+        function codeEingabe(nummer) {
+            let foo = promt("Code?");
+            let bar = confirm('Confirm or deny');
+            switch (nummer) {
+            case 1:
+                console.log(foo, bar, nummer)
+                if (foo == 8394) {
+                    return true;
+                } else {
+                    return false;
+                }
+            default:
+                console.log("Da hat leider etwas nicht funktioniert.")
+                return false;
+            }
         }
         
         function showIframe(url) {
