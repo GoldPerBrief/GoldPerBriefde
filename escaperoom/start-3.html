@@ -272,11 +272,10 @@
         }
 
         function codeEingabe(nummer) {
-            let foo = promt("Code?");
-            let bar = confirm('Confirm or deny');
+            let foo = window.promt("Code?");
             switch (nummer) {
             case 1:
-                console.log(foo, bar, nummer)
+                console.log(foo, nummer)
                 if (foo == 8394) {
                     return true;
                 } else {
