@@ -315,7 +315,7 @@
                     verifyCode(messageData.code);
                 }
             } catch (e) {
-                console.error('Invalid message data', e);
+                console.error('Invalid message data', event.data, e);
             }
         });
 
