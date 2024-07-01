@@ -1,0 +1,81 @@
+body, html {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: black;
+}
+.hidden_image {
+    width: 0;
+    height: 0;
+    object-fit: contain;
+    position: relative;
+    display: none;
+}
+.bg_image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    position: relative;
+}
+.highlight_image {
+    position: absolute;
+    display: none;
+    pointer-events: none;
+}
+.footer-text {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.iframe-container {
+    position: relative;
+    width: 50%;
+    height: 50%;
+    background: white;
+    border: 5px solid #d2b48c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.iframe-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #d2b48c;
+}
+.iframe-container .close-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px; /* Adjusted position */
+    width: 30px;
+    height: 30px;
+    background: #d2b48c;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.iframe-container .close-btn::before {
+    content: '✖'; /* Unicode character for a close icon */
+    font-size: 16px;
+    color: white;
+}
