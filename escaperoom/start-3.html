@@ -241,6 +241,12 @@
                     performGreenAction();
                 } else if (r === 0 && g === 0 && b === 255) {
                     performBlueAction();
+                } else if (r === 255 && g === 255 && b === 255) {
+                    performWhiteAction();
+                } else if (r === 0 && g === 0 && b === 0) {
+                    performBlackAction();
+                } else if (r === 255 && g === 0 && b === 255) {
+                    performMagentaAction();
                 } else {
                     performDefaultAction();
                 }
@@ -251,7 +257,7 @@
 
         function performRedAction() {
             console.log("Rot erkannt! Aktion für Rot ausführen.");
-            showIframe('https://learningapps.org/watch?app=19171591');
+            showIframe('https://learningapps.org/watch?app=pv3d5ihm224');
         }
 
         function performGreenAction() {
@@ -267,6 +273,19 @@
             console.log("Blau erkannt! Aktion für Blau ausführen.");
             showIframe('https://learningapps.org/watch?v=pvz63fmik24');
             /* Code: 8394*/
+        }
+
+        function performWhiteAction() {
+            console.log("Blau erkannt! Aktion für Weiß ausführen.");
+            showIframe('https://learningapps.org/watch?v=pkfagetka24');
+        }
+
+        function performBlackAction() {
+            showIframe('https://learningapps.org/watch?v=peytzchtc24');
+        }
+
+        function performMagentaAction() {
+            showDialog(0);
         }
 
         function performDefaultAction() {
