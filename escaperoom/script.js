@@ -15,6 +15,8 @@ hiddenImage.onload = () => {
     document.getElementById("loadingText").style.display = 'none';
 };
 
+var korrekterCode = 0;
+
 function handleMouseMove(event) {
     const rect = mainImage.getBoundingClientRect();
     const x = Math.round((event.clientX - rect.left) / rect.width * hiddenImage.width);
@@ -200,11 +202,13 @@ function performDefaultAction() {
     console.log("Keine spezifische Farbe erkannt. Standardaktion ausführen.");
 }*/
 
-    function codeEingabe() {
+    function codeEingabe(code) {
         const params = {
             length: 4,
             charset: 'numeric'
         };
+
+        korrekterCode = code;
 
         const base64Params = btoa(JSON.stringify(params));
 
@@ -219,14 +223,6 @@ function performDefaultAction() {
     }
 
 function verifyCode(code) {
-    switch (codeId) {
-    case 1:
-        korrekterCode = '8394';
-        break;
-    default:
-        korrekterCode = '0000';
-        break;
-    }
     if (code === korrekterCode) {
         correctCodeEvent(code);
     } else {
