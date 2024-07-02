@@ -134,21 +134,22 @@ function performActionBasedOnPixelColor(x, y) {
         // console.log(`RGB: (${r}, ${g}, ${b})`);
 
         performAction(r,g,b,a);
-        // if (r === 255 && g === 0 && b === 0) {
-        //     performRedAction();
-        // } else if (r === 0 && g === 255 && b === 0) {
-        //     performGreenAction();
-        // } else if (r === 0 && g === 0 && b === 255) {
-        //     performBlueAction();
-        // } else if (r === 247 && g === 247 && b === 247) {
-        //     performWhiteAction();
-        // } else if (r === 102 && g === 102 && b === 102) {
-        //     performBlackAction();
-        // } else if (r === 255 && g === 0 && b === 255) {
-        //     performMagentaAction();
-        // } else {
-        //     performDefaultAction();
-        // }
+        
+/*         if (r === 255 && g === 0 && b === 0) {
+            performRedAction();
+        } else if (r === 0 && g === 255 && b === 0) {
+            performGreenAction();
+        } else if (r === 0 && g === 0 && b === 255) {
+            performBlueAction();
+        } else if (r === 247 && g === 247 && b === 247) {
+            performWhiteAction();
+        } else if (r === 102 && g === 102 && b === 102) {
+            performBlackAction();
+        } else if (r === 255 && g === 0 && b === 255) {
+            performMagentaAction();
+        } else {
+            performDefaultAction();
+        } */
 
 
     } catch (e) {
@@ -161,43 +162,43 @@ function performActionBasedOnPixelColor(x, y) {
          // dats importänd
     // };
 
-// function performRedAction() {
-//     console.log("Rot erkannt! Aktion für Rot ausführen.");
-//     showIframe('https://learningapps.org/watch?app=pv3d5ihm224');
-// }
+/*function performRedAction() {
+    console.log("Rot erkannt! Aktion für Rot ausführen.");
+    showIframe('https://learningapps.org/watch?app=pv3d5ihm224');
+}
 
-// function performGreenAction() {
-//     // console.log("Grün erkannt! Aktion für Grün ausführen.");
-//     // showIframe('https://learningapps.org/watch?app=32557273');
+function performGreenAction() {
+    // console.log("Grün erkannt! Aktion für Grün ausführen.");
+    // showIframe('https://learningapps.org/watch?app=32557273');
 
-//     // Codeeingabe
-//     codeId = 1;
-//     ergebnis = codeEingabe();
-// }
+    // Codeeingabe
+    codeId = 1;
+    ergebnis = codeEingabe();
+}
 
-// function performBlueAction() {
-//     console.log("Blau erkannt! Aktion für Blau ausführen.");
-//     showIframe('https://learningapps.org/watch?v=pvz63fmik24');
-//     /* Code: 8394*/
-// }
+function performBlueAction() {
+    console.log("Blau erkannt! Aktion für Blau ausführen.");
+    showIframe('https://learningapps.org/watch?v=pvz63fmik24');
+     // Code: 8394
+}
 
-// function performWhiteAction() {
-//     console.log("Blau erkannt! Aktion für Weiß ausführen.");
-//     showIframe('https://learningapps.org/watch?v=pkfagetka24');
-// }
+function performWhiteAction() {
+    console.log("Blau erkannt! Aktion für Weiß ausführen.");
+    showIframe('https://learningapps.org/watch?v=pkfagetka24');
+}
 
-// function performBlackAction() {
-//     showIframe('https://learningapps.org/watch?v=peytzchtc24');
-// }
+function performBlackAction() {
+    showIframe('https://learningapps.org/watch?v=peytzchtc24');
+}
 
-// function performMagentaAction() {
-//     // showDialog(0);
-//     showIframe('https://learningapps.org/watch?v=ppmcq1h0t24')
-// }
+function performMagentaAction() {
+    // showDialog(0);
+    showIframe('https://learningapps.org/watch?v=ppmcq1h0t24')
+}
 
-// function performDefaultAction() {
-//     console.log("Keine spezifische Farbe erkannt. Standardaktion ausführen.");
-// }
+function performDefaultAction() {
+    console.log("Keine spezifische Farbe erkannt. Standardaktion ausführen.");
+}*/
 
     function codeEingabe() {
         const params = {
