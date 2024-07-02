@@ -223,12 +223,11 @@ function performDefaultAction() {
     }
 
 function verifyCode(code) {
-    if (code === korrekterCode) {
+    if (code == korrekterCode) {
         correctCodeEvent(code);
     } else {
-        alert("leider falsch!")
+        alert("leider falsch!");
     }
-}
 
 window.addEventListener('message', function(event) {
     try {
