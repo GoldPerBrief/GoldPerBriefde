@@ -3,29 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Der "coole" Escaperoom</title>
+    <title>Der "coole" Escaperoom - Eingang</title>
     <link rel="stylesheet" type="text/css" href="./styles.css">
 </head>
 <body>
-    <img id="bg_01" class="bg_image" src="./assets/background_01.png" alt="Bild">
-    <img id="hidden_01" class="hidden_image" src="./assets/hidden_01.png" alt="Verstecktes Bild">
+    <img id="bg_01" class="bg_image" src="./assets/background_01.png">
+    <img id="hidden_01" class="hidden_image" src="./assets/hidden_01.png">
     <img id="highlightImage" class="highlight_image" src="" alt="Highlight Bild">
     <div id="loadingText" class="footer-text">Laden... Bitte warten.</div>
     <div id="overlay" class="overlay">
         <div class="iframe-container">
             <iframe id="actionIframe" src="" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
-            <button class="close-btn" id="closeBtn"></button> <!-- Added ID to the close button -->
+            <button class="close-btn" id="closeBtn"></button> 
         </div>
     </div>
-    <script type="text/javascript" src="./script.js"></script>
-    <script>
+    <script type="text/javascript" src="./script.js"></script><script>
         function performAction(r,g,b,a) {
             var color = `${r};${g};${b};${a}`;
 
             switch(color) {
-            case '0;0;255;255':
-                showIframe('https://learningapps.org/watch?v=pvz63fmik24')
+            case 'something else':
+                // do something
                 break;
+            case '0;0;255;255':
+                showIframe();
+                break
             case '0;0;0;0':
             default:
                 break;

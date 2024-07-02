@@ -156,10 +156,10 @@ function performActionBasedOnPixelColor(x, y) {
     }
     }
 
-    function performAction(r,g,b,a) {
-        // this function needs to be present and properly implemented in the html.
-        // dats importänd
-    };
+    // function performAction(r,g,b,a) {
+         // this function needs to be present and properly implemented in the html.
+         // dats importänd
+    // };
 
 // function performRedAction() {
 //     console.log("Rot erkannt! Aktion für Rot ausführen.");
@@ -199,23 +199,23 @@ function performActionBasedOnPixelColor(x, y) {
 //     console.log("Keine spezifische Farbe erkannt. Standardaktion ausführen.");
 // }
 
-function codeEingabe() {
-    const params = {
-        length: 4,
-        charset: 'numeric'
-    };
+    function codeEingabe() {
+        const params = {
+            length: 4,
+            charset: 'numeric'
+        };
 
-    const base64Params = btoa(JSON.stringify(params));
+        const base64Params = btoa(JSON.stringify(params));
 
-    const iframe = document.getElementById("actionIframe");
-    showIframe("./assets/embed/embedCodeInput.html");
+        const iframe = document.getElementById("actionIframe");
+        showIframe("./assets/embed/embedCodeInput.html");
 
-    iframe.onload = function() {
-        iframe.contentWindow.postMessage(base64Params, '*');
+        iframe.onload = function() {
+            iframe.contentWindow.postMessage(base64Params, '*');
+        }
+
+
     }
-
-
-}
 
 function verifyCode(code) {
     switch (codeId) {
@@ -227,7 +227,7 @@ function verifyCode(code) {
         break;
     }
     if (code === korrekterCode) {
-        alert("Code stümmt");
+        correctCodeEvent(code);
     } else {
         alert("leider falsch!")
     }
