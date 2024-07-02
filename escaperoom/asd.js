@@ -140,50 +140,8 @@ function performActionBasedOnPixelColor(x, y) {
     } catch (e) {
         console.error("Fehler beim Abrufen der Pixel-Daten:", e);
     }
-}
+    }
 
-    // function performAction(r,g,b,a) {
-         // this function needs to be present and properly implemented in the html.
-         // dats importänd
-    // };
-
-/*function performRedAction() {
-    console.log("Rot erkannt! Aktion für Rot ausführen.");
-    showIframe('https://learningapps.org/watch?app=pv3d5ihm224');
-}
-
-function performGreenAction() {
-    // console.log("Grün erkannt! Aktion für Grün ausführen.");
-    // showIframe('https://learningapps.org/watch?app=32557273');
-
-    // Codeeingabe
-    codeId = 1;
-    ergebnis = codeEingabe();
-}
-
-function performBlueAction() {
-    console.log("Blau erkannt! Aktion für Blau ausführen.");
-    showIframe('https://learningapps.org/watch?v=pvz63fmik24');
-     // Code: 8394
-}
-
-function performWhiteAction() {
-    console.log("Blau erkannt! Aktion für Weiß ausführen.");
-    showIframe('https://learningapps.org/watch?v=pkfagetka24');
-}
-
-function performBlackAction() {
-    showIframe('https://learningapps.org/watch?v=peytzchtc24');
-}
-
-function performMagentaAction() {
-    // showDialog(0);
-    showIframe('https://learningapps.org/watch?v=ppmcq1h0t24')
-}
-
-function performDefaultAction() {
-    console.log("Keine spezifische Farbe erkannt. Standardaktion ausführen.");
-}*/
 
     function codeEingabe(code) {
         const params = {
@@ -211,7 +169,6 @@ function verifyCode(code) {
     } else {
         alert("leider falsch!");
     }
-}
 
 window.addEventListener('message', function(event) {
     try {
