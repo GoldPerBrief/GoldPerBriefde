@@ -20,7 +20,16 @@
     <script type="text/javascript" src="./script.js"></script>
     <script>
         function performAction(r,g,b,a) {
-            console.log(`RGB: (${r}, ${g}, ${b}, ${a})`);
+            var color = `${r};${g};${b};${a}`;
+
+            switch(color) {
+            case '0;0;255;255':
+                showIframe('https://learningapps.org/watch?v=pvz63fmik24')
+                break;
+            case '0;0;0;0':
+            default:
+                break;
+            }
         }
     </script>
 </body>
