@@ -6,6 +6,7 @@ const overlay = document.getElementById('overlay');
 const actionIframe = document.getElementById('actionIframe');
 const closeBtn = document.getElementById('closeBtn'); // Added
 codeId = 0;
+var korrekterCode = 0;
 
 hiddenImage.crossOrigin = "Anonymous";
 
@@ -15,7 +16,6 @@ hiddenImage.onload = () => {
     document.getElementById("loadingText").style.display = 'none';
 };
 
-var korrekterCode = 0;
 
 function handleMouseMove(event) {
     const rect = mainImage.getBoundingClientRect();
