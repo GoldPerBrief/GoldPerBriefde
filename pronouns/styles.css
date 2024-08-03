@@ -1,0 +1,68 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.option {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s;
+}
+
+.option.left {
+    background-image: url('path-to-your-image1.jpg');
+}
+
+.option.right {
+    background-image: url('path-to-your-image2.jpg');
+}
+
+.option::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.option .content {
+    position: relative;
+    color: white;
+    font-size: 2em;
+    text-align: center;
+    z-index: 1;
+}
+
+@media (orientation: portrait) {
+    .container {
+        flex-direction: column;
+    }
+}
+
+@media (orientation: landscape) {
+    .container {
+        flex-direction: row;
+    }
+}
+
+.option:hover {
+    transform: scale(1.05);
+}
