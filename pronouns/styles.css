@@ -25,11 +25,11 @@ body, html {
 }
 
 .option.left {
-    background-image: url('path-to-your-image1.jpg');
+    background-image: url('bg-img-de.jpg');
 }
 
 .option.right {
-    background-image: url('path-to-your-image2.jpg');
+    background-image: url('bg-img-en.jpg');
 }
 
 .option::before {
