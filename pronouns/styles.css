@@ -25,11 +25,11 @@ body, html {
 }
 
 .option.left {
-    background-image: url('bg-img-de.jpg');
+    background-image: url('https://img1.rapidleaks.com/2017/10/Men-and-women-enjoying-Oktoberfest.jpg');
 }
 
 .option.right {
-    background-image: url('bg-img-en.jpg');
+    background-image: url('http://www.londonmagicaltours.com/blog/wp-content/uploads/2013/02/teainlondon1-1024x667.jpg');
 }
 
 .option::before {
