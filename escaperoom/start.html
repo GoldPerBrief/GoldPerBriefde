@@ -16,7 +16,12 @@
             <iframe id="actionIframe" src="" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
             <button class="close-btn" id="closeBtn"></button> 
         </div>
-    </0div>
+    </div>
+        <div id="dialogue-box">
+            <img id="character-art" src="" alt="Character Art" />
+            <div id="dialogue-text"></div>
+        </div>
+        <script src="assets/embed/dialogue.js"></script>
     <script type="text/javascript" src="./script.js"></script>
     <script>
         function performAction(r,g,b,a) {
@@ -24,10 +29,12 @@
 
             switch(color) {
             case '0;255;0;255':
-                codeEingabe(8394);
+
+                showDialog("")
+                showIframe('https://learningapps.org/watch?v=pvz63fmik24');
                 break;
             case '255;0;0;255':
-                showIframe('https://learningapps.org/watch?v=pvz63fmik24');
+                codeEingabe(8394);
                 break
             case '0;0;0;0':
             default:

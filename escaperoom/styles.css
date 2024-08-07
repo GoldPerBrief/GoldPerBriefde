@@ -1,12 +1,10 @@
 body, html {
     margin: 0;
     height: 100%;
-    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: black;
 }
 .hidden_image {
     width: 0;
@@ -79,3 +77,27 @@ body, html {
     font-size: 16px;
     color: white;
 }
+
+#dialogue-box {
+    border: 1px solid black;
+    padding: 10px;
+    width: 400px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    white-space: pre; /* Preserve whitespace */
+}
+#character-art {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 80px;
+    height: 80px;
+}
+#dialogue-text {
+    position: absolute;
+    top: 10px;
+    left: 100px;
+    width: 280px;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre; /* Prevent automatic line breaks */

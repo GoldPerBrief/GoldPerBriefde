@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dialogue Display Game</title>
+    <style>
+        #dialogue-box {
+            border: 1px solid black;
+            padding: 10px;
+            width: 400px;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            white-space: pre; /* Preserve whitespace */
+        }
+        #character-art {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 80px;
+            height: 80px;
+        }
+        #dialogue-text {
+            position: absolute;
+            top: 10px;
+            left: 100px;
+            width: 280px;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre; /* Prevent automatic line breaks */
+        }
+    </style>
+</head>
+<body>
+    <div id="dialogue-box">
+        <img id="character-art" src="" alt="Character Art" />
+        <div id="dialogue-text"></div>
+    </div>
+    <iframe id="dialogue-iframe" style="display:none;"></iframe>
+
+    <script src="dialogue.js"></script>
+</body>
+</html>
