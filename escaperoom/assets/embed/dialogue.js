@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         interval = setInterval(() => {
             if (isSkipping) {
                 clearInterval(interval);
-                dialogueText.innerHTML += line.slice(currentCharIndex) + '<br>';
+                dialogueText.innerHTML += line.slice(currentCharIndex) + '<br>'; // Add the remainder of the line
                 if (waitForInput) {
                     showInputReminder();
                 } else {
@@ -133,6 +133,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const skipToEndOfTextBox = () => {
         isSkipping = true;
         clearInterval(interval);
+
+        // Complete the current line
+        if (currentCharIndex < parsedLines[currentLineIndex - 1].length) {
+            const line = parsedLines[currentLineIndex - 1];
+            dialogueText.innerHTML += line.slice(currentCharIndex) + '<br>';
+        }
 
         while (currentLineIndex < parsedLines.length) {
             const line = parsedLines[currentLineIndex++];

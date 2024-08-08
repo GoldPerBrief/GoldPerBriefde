@@ -2,16 +2,13 @@
 @speed 20
 Hier scheinen Zettel auf dem
 
-
 Tisch zu liegen.
 @wait 500
 
 
 Ob diese vielleicht etwas zu
 
-
 bedeuten haben könnten?
-
 
 @input 2000
 @new-textbox
