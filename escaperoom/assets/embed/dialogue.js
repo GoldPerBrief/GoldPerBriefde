@@ -103,27 +103,17 @@ document.addEventListener('DOMContentLoaded', () => {
         interval = setInterval(() => {
             if (isSkipping) {
                 clearInterval(interval);
-                dialogueText.innerHTML += line.slice(currentCharIndex);
-                currentCharIndex = line.length;
+                dialogueText.innerHTML += line.slice(currentCharIndex) + '<br>';
                 if (waitForInput) {
                     showInputReminder();
                 } else {
-                    setTimeout(displayNextLine, charDisplaySpeed);
+                    displayNextLine();
                 }
                 return;
             }
 
             if (currentCharIndex < line.length) {
-                if (line[currentCharIndex] === '@') {
-                    clearInterval(interval);
-                    const commandEndIndex = line.indexOf(' ', currentCharIndex);
-                    const command = line.slice(currentCharIndex, commandEndIndex).trim();
-                    handleControlCharacter(command);
-                    currentCharIndex = commandEndIndex + 1;
-                    typeLine(line); // Continue typing the line after handling the command
-                } else {
-                    dialogueText.innerHTML += line[currentCharIndex++];
-                }
+                dialogueText.innerHTML += line[currentCharIndex++];
             } else {
                 clearInterval(interval);
                 if (currentLineIndex < parsedLines.length && parsedLines[currentLineIndex] === '') {
@@ -135,8 +125,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }, charDisplaySpeed);
     };
 
-    const skipToEndOfLine = () => {
+    const skipToEndOfTextBox = () => {
         isSkipping = true;
+        clearInterval(interval);
+
+        while (currentLineIndex < parsedLines.length) {
+            const line = parsedLines[currentLineIndex++];
+            if (line.startsWith('@')) {
+                handleControlCharacter(line);
+                if (pauseParsing || newTextbox) break;
+            } else {
+                dialogueText.innerHTML += line + '<br>';
+            }
+        }
+
+        if (waitForInput) {
+            showInputReminder();
+        } else if (!pauseParsing) {
+            setTimeout(displayNextLine, charDisplaySpeed);
+        }
     };
 
     const showInputReminder = () => {
@@ -154,10 +161,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 dialogueText.innerHTML = dialogueText.innerHTML.replace('<br><small>(Press space or click to continue)</small>', '');
                 displayNextLine();
             } else {
-                skipToEndOfLine();
+                skipToEndOfTextBox();
             }
         } else {
-            skipToEndOfLine();
+            skipToEndOfTextBox();
         }
     };
 
