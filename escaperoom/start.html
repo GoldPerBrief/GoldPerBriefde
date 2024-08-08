@@ -17,7 +17,7 @@
             <button class="close-btn" id="closeBtn"></button> 
         </div>
     </div>
-        <div id="dialogue-box">
+        <div id="dialogue-box" style="display:none">
             <img id="character-art" src="" alt="Character Art" />
             <div id="dialogue-text"></div>
         </div>
@@ -32,8 +32,11 @@
 
                 loadDialogue('assets/dialogue/room-01-tisch-01.txt', () => {
                     console.log('dialogue has finished')
+                    document.getElementById('dialogue-box').style="display: none"
+
                     showIframe('https://learningapps.org/watch?v=pvz63fmik24');
                 });
+                document.getElementById('dialogue-box').style="display: show"
                 break;
             case '255;0;0;255':
                 codeEingabe(8394);

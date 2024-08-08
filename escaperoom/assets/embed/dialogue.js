@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let inputReminderTimeout;
     let isSkipping = false;
     let dialogueCompleted = false; // Flag to track completion
+    let textboxOnScreen = false; // Flag to track wether or not to display the textbox; handled by the main script, not this one
 
     const loadDialogueFile = async (url, callback = null) => {
         try {
@@ -239,6 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Expose the loadDialogueFile function globally so it can be called from outside
+    // Expose the loadDialogueFile function and the textboxOnScreen property globally so it can be called / looked at from the outside
     window.loadDialogue = loadDialogueFile;
+    window.shouldDisplayTextbox = textboxOnScreen;
 });
