@@ -10,9 +10,10 @@ Ob diese vielleicht etwas zu
 
 bedeuten haben könnten?
 
-@input 2000
+@input 1000
 @new-textbox
-
+@image assets/dialogue/characters/schiller-neutral.png
+@speed 20
 Mal sehen...
 
 @input 1000

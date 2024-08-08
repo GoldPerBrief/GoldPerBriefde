@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let charDisplaySpeed = 50; // Default 20 chars per second
     let currentLineIndex = 0;
     let parsedLines = [];
-    let timeoutDelay = 1000; // Default 1 second delay
+    let timeoutDelay = 1000;
     let interval;
     let newTextbox = false;
     let pauseParsing = false;
@@ -45,6 +45,20 @@ document.addEventListener('DOMContentLoaded', () => {
         clearTimeout(inputReminderTimeout);
     };
 
+        const clearDialogueNextBox = () => {
+        dialogueText.innerHTML = "";
+        characterArt.src = ''; // Clear character art if needed
+        // Ensure all state variables are reset if necessary
+        currentCharIndex = 0;
+        clearInterval(interval);
+        pauseParsing = false;
+        isSkipping = false;
+        waitForInput = false;
+        dialogueCompleted = false;
+        clearTimeout(inputReminderTimeout);
+    };
+
+
     const parseDialogue = (data) => {
         parsedLines = data.split('\n');
         console.log('Parsed Lines:', parsedLines); // Debugging
@@ -59,14 +73,17 @@ document.addEventListener('DOMContentLoaded', () => {
         switch (cmd) {
             case 'speed':
                 charDisplaySpeed = 1000 / parseInt(value, 10);
+                console.log('speed set to ' + value);
                 break;
             case 'image':
                 characterArt.src = value;
+                console.log('character image set to ' + value);
                 break;
             case 'new-textbox':
+            	console.log('displaying new textbox');
                 clearInterval(interval);
                 setTimeout(() => {
-                    clearDialogue(); // Clear dialogue for the new textbox
+                    clearDialogueNextBox(); // Clear dialogue for the new textbox
                     newTextbox = false;
                     displayNextLine();
                 }, timeoutDelay);
@@ -74,8 +91,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             case 'timeout-delay':
                 timeoutDelay = parseInt(value, 10);
+                console.log('timeoutDelay set to ' + value);
                 break;
             case 'wait':
+            	console.log('waiting for ' + value + 'ms');
                 pauseParsing = true;
                 setTimeout(() => {
                     pauseParsing = false;
@@ -83,11 +102,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, parseInt(value, 10));
                 break;
             case 'input':
+            	console.log("waitign for input with delay of " + value);
                 pauseParsing = true;
                 waitForInput = true;
-                inputReminderTimeout = setTimeout(showInputReminder, parseInt(value)); // Show reminder after 5 seconds
+                inputReminderTimeout = setTimeout(showInputReminder, parseInt(value, 10)); // Show reminder after 5 seconds
                 break;
             case 'wait-ms':
+				console.log('waiting for ' + value + 'ms');
                 pauseParsing = true;
                 setTimeout(() => {
                     pauseParsing = false;
@@ -99,8 +120,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const displayNextLine = () => {
+    	if (dialogueCompleted) {
+    		clearDialogue();
+    		dialogueCompleted = true;
+    	}
         if (pauseParsing || dialogueCompleted) return; // Do not display next line if parsing is paused or dialogue is completed
 
+        console.log(currentLineIndex, parsedLines.length, parsedLines);
         if (currentLineIndex >= parsedLines.length) {
             if (!dialogueCompleted) {  // Ensure the callback is called only once
                 dialogueCompleted = true;
@@ -160,27 +186,26 @@ document.addEventListener('DOMContentLoaded', () => {
         // Complete the current line
         if (currentCharIndex < parsedLines[currentLineIndex - 1].length) {
             const line = parsedLines[currentLineIndex - 1];
-            dialogueText.innerHTML += line.slice(currentCharIndex) + '<br>';
+            dialogueText.innerHTML += line.slice(currentCharIndex);
         }
 
         while (currentLineIndex < parsedLines.length) {
-            const line = parsedLines[currentLineIndex++];
+            const line = parsedLines[currentLineIndex++].trim();
             if (line.startsWith('@')) {
                 handleControlCharacter(line);
                 if (pauseParsing || newTextbox) break;
-            } else if (line.trim() === '') {
+            } else if (line === '') {
                 // Only add a line break if not already added
                 if (dialogueText.innerHTML !== '<br>') {
                     dialogueText.innerHTML += '<br>';
                 }
             } else {
-                dialogueText.innerHTML += line + '<br>'; // Add the line with a line break
+            	console.log(line);
+                dialogueText.innerHTML += line; // Add the line with a line break
             }
         }
 
-        if (waitForInput) {
-            showInputReminder();
-        } else if (!pauseParsing) {
+       if (!pauseParsing) {
             setTimeout(displayNextLine, charDisplaySpeed);
         }
     };
