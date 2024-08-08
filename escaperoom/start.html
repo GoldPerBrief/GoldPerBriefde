@@ -12,31 +12,64 @@
     <img id="highlightImage" class="highlight_image" src="">
     <div id="loadingText" class="footer-text">Laden... Bitte warten.</div>
     <div id="overlay" class="overlay">
-        <div class="iframe-container">
-            <iframe id="actionIframe" src="" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
-            <button class="close-btn" id="closeBtn"></button> 
-        </div>
+    <div class="iframe-container">
+        <iframe id="actionIframe" src="" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+        <button class="close-btn" id="closeBtn"></button> 
     </div>
-        <div id="dialogue-box" style="display:none">
+    </div>
+
+        <!-- here is the dialogue box -->
+
+    <div id="dialogue-enerything-else-disabler" style="display: none"></div>
+    <div id="dialogue-box" style="display:none">
             <img id="character-art" src="" alt="Character Art" />
             <div id="dialogue-text"></div>
-        </div>
+    </div>
     <script type="text/javascript" src="assets/embed/dialogue.js"></script>
+
+        <!-- copy this bit into other rooms to add the dialogue system to it -->
+        <!-- be sure to adjust the script location as necessary! -->
+
     <script type="text/javascript" src="./script.js"></script>
     <script>
+        window.addEventListener("message", function(event) {
+            if (event.data && event.data.split) {
+                var a = event.data.split("|");
+                if (a[0] == "AppSolved") {
+                    document.getElementById('closeBtn').click();
+                    loadDialogue('assets/dialogue/riddle-finished-' + a[1] + '.txt', () => {
+                        console.log('dialogue has finished')
+                        document.getElementById('dialogue-box').style="display: none"
+                        document.getElementById('dialogue-enerything-else-disabler').style="display: none"
+                        // and here
+                    });
+                    document.getElementById('dialogue-box').style="display: show"
+                    document.getElementById('dialogue-enerything-else-disabler').style="display: show"
+                }
+        }
+        });
         function performAction(r,g,b,a) {
             var color = `${r};${g};${b};${a}`;
 
             switch(color) {
             case '0;255;0;255':
 
+                // copy-paste the below block of code into other rooms or situations
+                // (and adjust the code to be executed in the appropriate section, as
+                // well as the dialogue file), and dialogue will be called.
                 loadDialogue('assets/dialogue/room-01-tisch-01.txt', () => {
                     console.log('dialogue has finished')
                     document.getElementById('dialogue-box').style="display: none"
-
-                    showIframe('https://learningapps.org/watch?v=pvz63fmik24');
+                    document.getElementById('dialogue-enerything-else-disabler').style="display: none"
+                    // your code goes between here...
+                    // showIframe('https://learningapps.org/watch?v=pvz63fmik24');
+                    showIframe('https://learningapps.org/watch?v=2qurysg2');
+                    // and here
                 });
                 document.getElementById('dialogue-box').style="display: show"
+                document.getElementById('dialogue-enerything-else-disabler').style="display: show"
+                // copy up to this line.
+
                 break;
             case '255;0;0;255':
                 codeEingabe(8394);

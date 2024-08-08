@@ -1,3 +1,4 @@
+@new-textbox
 @image assets/dialogue/characters/schiller-neutral.png
 @speed 20
 Hier scheinen Zettel auf dem

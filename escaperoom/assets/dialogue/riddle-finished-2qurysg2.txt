@@ -1,0 +1,14 @@
+@new-textbox
+@image assets/dialogue/characters/schiller-neutral.png
+@speed 20
+Es scheint, als hättest du das
+
+versteckte testrätsel gefunden!
+
+@wait 500
+@image assets/dialogue/characters/schiller-aha.jpg
+Bitte erzähl niemandem davon,
+
+ok?
+
+@input 1000
