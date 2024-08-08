@@ -23,16 +23,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const dialogueData = await response.text();
             onDialogueComplete = callback;
             dialogueCompleted = false; // Reset completion flag
+            clearDialogue(); // Clear previous dialogue
             parseDialogue(dialogueData);
         } catch (error) {
             console.error("Error loading dialogue file:", error);
         }
     };
 
+    const clearDialogue = () => {
+        dialogueText.innerHTML = "";
+        characterArt.src = ''; // Clear character art if needed
+        // Ensure all state variables are reset if necessary
+        currentCharIndex = 0;
+        currentLineIndex = 0;
+        parsedLines = [];
+        clearInterval(interval);
+        pauseParsing = false;
+        isSkipping = false;
+        waitForInput = false;
+        dialogueCompleted = false;
+        clearTimeout(inputReminderTimeout);
+    };
+
     const parseDialogue = (data) => {
         parsedLines = data.split('\n');
-        currentLineIndex = 0; // Reset line index when new dialogue is loaded
-        dialogueText.innerHTML = ""; // Clear previous dialogue
         console.log('Parsed Lines:', parsedLines); // Debugging
         displayNextLine();
     };
@@ -52,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'new-textbox':
                 clearInterval(interval);
                 setTimeout(() => {
-                    dialogueText.innerHTML = "";
+                    clearDialogue(); // Clear dialogue for the new textbox
                     newTextbox = false;
                     displayNextLine();
                 }, timeoutDelay);
@@ -73,6 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 waitForInput = true;
                 inputReminderTimeout = setTimeout(showInputReminder, parseInt(value)); // Show reminder after 5 seconds
                 break;
+            case 'wait-ms':
+                pauseParsing = true;
+                setTimeout(() => {
+                    pauseParsing = false;
+                    displayNextLine();
+                }, parseInt(value, 10));
+                break;
             // Add more control commands as needed
         }
     };
@@ -90,13 +111,19 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const line = parsedLines[currentLineIndex++];
+        const line = parsedLines[currentLineIndex++].trim();
         console.log('Displaying Line:', line); // Debugging
         if (line.startsWith('@')) {
             handleControlCharacter(line);
             if (!pauseParsing && !newTextbox) {
                 displayNextLine(); // Handle control character and move to next line
             }
+        } else if (line === '') {
+            // Only add a line break if the previous line was not an empty line
+            if (dialogueText.innerHTML !== '<br>') {
+                dialogueText.innerHTML += '<br>'; // Add a line break for completely empty lines
+            }
+            displayNextLine(); // Continue to the next line
         } else {
             currentCharIndex = 0;
             typeLine(line);
@@ -108,12 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
         interval = setInterval(() => {
             if (isSkipping) {
                 clearInterval(interval);
-                dialogueText.innerHTML += line.slice(currentCharIndex) + '<br>'; // Add the remainder of the line
-                if (waitForInput) {
-                    showInputReminder();
-                } else {
-                    displayNextLine();
-                }
+                dialogueText.innerHTML += line.slice(currentCharIndex) + '<br>'; // Add the remainder of the line and a line break
+                displayNextLine();
                 return;
             }
 
@@ -121,9 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 dialogueText.innerHTML += line[currentCharIndex++];
             } else {
                 clearInterval(interval);
-                if (currentLineIndex < parsedLines.length && parsedLines[currentLineIndex] === '') {
-                    currentLineIndex++;
-                    dialogueText.innerHTML += '<br>'; // Add newline for empty line
+                if (currentLineIndex < parsedLines.length && parsedLines[currentLineIndex].trim() === '') {
+                    dialogueText.innerHTML += '<br>'; // Add line break for an empty line
+                    currentLineIndex++; // Skip the empty line
                 }
                 setTimeout(displayNextLine, charDisplaySpeed);
             }
@@ -145,8 +168,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (line.startsWith('@')) {
                 handleControlCharacter(line);
                 if (pauseParsing || newTextbox) break;
+            } else if (line.trim() === '') {
+                // Only add a line break if not already added
+                if (dialogueText.innerHTML !== '<br>') {
+                    dialogueText.innerHTML += '<br>';
+                }
             } else {
-                dialogueText.innerHTML += line + '<br>';
+                dialogueText.innerHTML += line + '<br>'; // Add the line with a line break
             }
         }
 
