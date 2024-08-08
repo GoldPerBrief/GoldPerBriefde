@@ -1,13 +1,17 @@
 @image assets/dialogue/characters/schiller-neutral.png
 @speed 20
-Hier scheinen Zettel auf dem Tisch
+Hier scheinen Zettel auf dem
 
-zu liegen.
+
+Tisch zu liegen.
 @wait 500
+
 
 Ob diese vielleicht etwas zu
 
+
 bedeuten haben könnten?
+
 
 @input 2000
 @new-textbox

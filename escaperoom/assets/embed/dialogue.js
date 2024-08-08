@@ -122,13 +122,18 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const skipToEndOfLine = () => {
+    	console.log('skipping')
         clearInterval(interval);
         const line = parsedLines[currentLineIndex - 1];
         if (line) {
             dialogueText.innerHTML += line.slice(currentCharIndex);
             currentCharIndex = line.length;
         }
-        setTimeout(displayNextLine, charDisplaySpeed);
+        if (waitForInput) {
+            showInputReminder();
+        } else {
+            setTimeout(displayNextLine, charDisplaySpeed);
+        }
     };
 
     const showInputReminder = () => {
@@ -143,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 clearTimeout(inputReminderTimeout);
                 waitForInput = false;
                 pauseParsing = false;
+                dialogueText.innerHTML = dialogueText.innerHTML.replace('<br><small>(Press space or click to continue)</small>', '');
                 displayNextLine();
             } else {
                 skipToEndOfLine();
