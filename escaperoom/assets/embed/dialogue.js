@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const characterArt = document.getElementById('character-art');
     const dialogueText = document.getElementById('dialogue-text');
 
-    let dialogueData = "";
     let currentCharIndex = 0;
     let charDisplaySpeed = 50; // Default 20 chars per second
     let currentLineIndex = 0;
@@ -12,11 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let interval;
     let newTextbox = false;
     let pauseParsing = false;
+    let onDialogueComplete = null; // Callback for when dialogue finishes
 
-    const loadDialogueFile = async (url) => {
+    const loadDialogueFile = async (url, callback = null) => {
         try {
             const response = await fetch(url);
-            dialogueData = await response.text();
+            const dialogueData = await response.text();
+            onDialogueComplete = callback;
             parseDialogue(dialogueData);
         } catch (error) {
             console.error("Error loading dialogue file:", error);
@@ -25,6 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const parseDialogue = (data) => {
         parsedLines = data.split('\n');
+        currentLineIndex = 0; // Reset line index when new dialogue is loaded
+        dialogueText.innerHTML = ""; // Clear previous dialogue
         console.log('Parsed Lines:', parsedLines); // Debugging
         displayNextLine();
     };
@@ -67,7 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const displayNextLine = () => {
         if (pauseParsing) return; // Do not display next line if parsing is paused
 
-        if (currentLineIndex >= parsedLines.length) return;
+        if (currentLineIndex >= parsedLines.length) {
+            if (onDialogueComplete) {
+                onDialogueComplete(); // Call the callback function when dialogue finishes
+            }
+            return;
+        }
 
         const line = parsedLines[currentLineIndex++];
         console.log('Displaying Line:', line); // Debugging
@@ -106,6 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, charDisplaySpeed);
     };
 
-    // Replace 'dialogue.txt' with the path to your text file
-    loadDialogueFile('assets/embed/dialogue.txt');
+    // Expose the loadDialogueFile function globally so it can be called from outside
+    window.loadDialogue = loadDialogueFile;
 });
