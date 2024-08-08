@@ -1,28 +1,16 @@
-@speed 10
-@image path/to/character.jpg
-Hello, this is a sample dialogue.
-
-This is the second line of the 
-
-dialogue.
-
-@image path/to/character-2.png
+@image assets/dialogue/characters/schiller-neutral.png
 @speed 20
-Here is some faster text, 
+Hier scheinen Zettel auf dem Tisch
 
-@speed 5
-displayed 
-@speed 20
-at 20 chars per 
+zu liegen.
+@wait 500
 
-second. This is the next line 
+Ob diese vielleicht etwas zu
 
-of the faster text.
+bedeuten haben könnten?
 
-@wait 2000
+@input 2000
 @new-textbox
-This is a new textbox with 
+Mal sehen...
 
-a 2-second delay before moving 
-
-to the next line.
+@input 1000

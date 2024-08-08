@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let newTextbox = false;
     let pauseParsing = false;
     let onDialogueComplete = null; // Callback for when dialogue finishes
+    let waitForInput = false;
+    let inputReminderTimeout;
 
     const loadDialogueFile = async (url, callback = null) => {
         try {
@@ -63,6 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     displayNextLine();
                 }, parseInt(value, 10));
                 break;
+            case 'input':
+                pauseParsing = true;
+                waitForInput = true;
+                inputReminderTimeout = setTimeout(showInputReminder, parseInt(value)); // Show reminder after 5 seconds
+                break;
             // Add more control commands as needed
         }
     };
@@ -113,6 +120,42 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, charDisplaySpeed);
     };
+
+    const skipToEndOfLine = () => {
+        clearInterval(interval);
+        const line = parsedLines[currentLineIndex - 1];
+        if (line) {
+            dialogueText.innerHTML += line.slice(currentCharIndex);
+            currentCharIndex = line.length;
+        }
+        setTimeout(displayNextLine, charDisplaySpeed);
+    };
+
+    const showInputReminder = () => {
+        if (waitForInput) {
+            dialogueText.innerHTML += '<br><small>(Press space or click to continue)</small>';
+        }
+    };
+
+    const handlePlayerInput = () => {
+        if (pauseParsing) {
+            if (waitForInput) {
+                clearTimeout(inputReminderTimeout);
+                waitForInput = false;
+                pauseParsing = false;
+                displayNextLine();
+            } else {
+                skipToEndOfLine();
+            }
+        }
+    };
+
+    document.addEventListener('click', handlePlayerInput);
+    document.addEventListener('keydown', (event) => {
+        if (event.code === 'Space') {
+            handlePlayerInput();
+        }
+    });
 
     // Expose the loadDialogueFile function globally so it can be called from outside
     window.loadDialogue = loadDialogueFile;
