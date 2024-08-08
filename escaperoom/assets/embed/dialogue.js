@@ -15,12 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let waitForInput = false;
     let inputReminderTimeout;
     let isSkipping = false;
+    let dialogueCompleted = false; // Flag to track completion
 
     const loadDialogueFile = async (url, callback = null) => {
         try {
             const response = await fetch(url);
             const dialogueData = await response.text();
             onDialogueComplete = callback;
+            dialogueCompleted = false; // Reset completion flag
             parseDialogue(dialogueData);
         } catch (error) {
             console.error("Error loading dialogue file:", error);
@@ -76,11 +78,14 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const displayNextLine = () => {
-        if (pauseParsing) return; // Do not display next line if parsing is paused
+        if (pauseParsing || dialogueCompleted) return; // Do not display next line if parsing is paused or dialogue is completed
 
         if (currentLineIndex >= parsedLines.length) {
-            if (onDialogueComplete) {
-                onDialogueComplete(); // Call the callback function when dialogue finishes
+            if (!dialogueCompleted) {  // Ensure the callback is called only once
+                dialogueCompleted = true;
+                if (onDialogueComplete) {
+                    onDialogueComplete(); // Call the callback function when dialogue finishes
+                }
             }
             return;
         }
