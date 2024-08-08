@@ -7,8 +7,8 @@ versteckte testrätsel gefunden!
 
 @wait 500
 @image assets/dialogue/characters/schiller-aha.jpg
-Bitte erzähl niemandem davon,
+Erzähl ja niemandem davon,
 
-ok?
+verstanden?
 
 @input 1000
