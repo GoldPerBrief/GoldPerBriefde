@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let onDialogueComplete = null; // Callback for when dialogue finishes
     let waitForInput = false;
     let inputReminderTimeout;
+    let isSkipping = false;
 
     const loadDialogueFile = async (url, callback = null) => {
         try {
@@ -98,7 +99,20 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const typeLine = (line) => {
+        isSkipping = false;
         interval = setInterval(() => {
+            if (isSkipping) {
+                clearInterval(interval);
+                dialogueText.innerHTML += line.slice(currentCharIndex);
+                currentCharIndex = line.length;
+                if (waitForInput) {
+                    showInputReminder();
+                } else {
+                    setTimeout(displayNextLine, charDisplaySpeed);
+                }
+                return;
+            }
+
             if (currentCharIndex < line.length) {
                 if (line[currentCharIndex] === '@') {
                     clearInterval(interval);
@@ -122,18 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const skipToEndOfLine = () => {
-    	console.log('skipping')
-        clearInterval(interval);
-        const line = parsedLines[currentLineIndex - 1];
-        if (line) {
-            dialogueText.innerHTML += line.slice(currentCharIndex);
-            currentCharIndex = line.length;
-        }
-        if (waitForInput) {
-            showInputReminder();
-        } else {
-            setTimeout(displayNextLine, charDisplaySpeed);
-        }
+        isSkipping = true;
     };
 
     const showInputReminder = () => {
@@ -153,6 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 skipToEndOfLine();
             }
+        } else {
+            skipToEndOfLine();
         }
     };
 
